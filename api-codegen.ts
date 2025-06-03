@@ -5,7 +5,7 @@ dotenv.config();
 
 const config: CodegenConfig = {
   schema: [`${process.env.VITE_API_BASE_URL}/graphql`, "client-schema.graphql"],
-  documents: ["**/*graphql.ts"],
+  documents: ["**/*graphql.ts", "**/*query.ts", "**/*mutation.ts"],
   ignoreNoDocuments: true,
   overwrite: true,
   generates: {
@@ -21,6 +21,9 @@ const config: CodegenConfig = {
           },
         },
       ],
+      config: {
+        useTypeImports: true,
+      },
     },
   },
 };

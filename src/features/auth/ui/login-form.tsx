@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { authSchema, type AuthFormValues } from "../model/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginMutation } from "../api/login.mutation";
@@ -22,11 +22,20 @@ export const LoginForm = () => {
     },
   });
 
-  const { isLoading, mutate } = useLoginMutation();
+  const [login, { loading }] = useLoginMutation();
+
+  const onSubmit: SubmitHandler<AuthFormValues> = ({ email, password }) => {
+    login({
+      variables: {
+        email,
+        password,
+      },
+    });
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(mutate)} className="space-y-4 h-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 h-full">
         <FormField
           control={form.control}
           name="email"
@@ -62,9 +71,9 @@ export const LoginForm = () => {
         <Button
           type="submit"
           className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white"
-          disabled={isLoading}
+          disabled={loading}
         >
-          {isLoading ? "Signing in..." : "Sign in"}
+          {loading ? "Signing in..." : "Sign in"}
         </Button>
       </form>
     </Form>
