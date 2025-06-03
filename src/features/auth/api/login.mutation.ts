@@ -1,4 +1,5 @@
 import { graphql } from "@/shared/api";
+import { setTokens } from "@/shared/model/tokens";
 import { useMutation } from "@apollo/client";
 import { toast } from "sonner";
 
@@ -13,6 +14,14 @@ const LOGIN = graphql(/* GraphQL */ `
 
 export const useLoginMutation = (markFormInvalid: () => void) =>
   useMutation(LOGIN, {
+    onCompleted: (data) => {
+      const { access_token, refresh_token } = data.login;
+
+      setTokens({
+        accessToken: access_token,
+        refreshToken: refresh_token,
+      });
+    },
     onError: (error) => {
       error.graphQLErrors.forEach((err) => {
         const message = err.extensions?.message as string;

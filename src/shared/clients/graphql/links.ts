@@ -2,7 +2,6 @@
 import { CONFIG } from "@/shared/config.ts";
 import { ApolloLink, HttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { createClient } from "graphql-ws";
@@ -10,8 +9,6 @@ import { createClient } from "graphql-ws";
 const httpLink = new HttpLink({
   uri: CONFIG.API_BASE_URL,
 });
-
-const JWT_EXPIRED_ERROR = "User is not authenticated";
 
 export const wsLink = new GraphQLWsLink(
   createClient({
@@ -35,7 +32,7 @@ export const wsLink = new GraphQLWsLink(
         console.log("GQL WS connection closed");
       },
     },
-  })
+  }),
 );
 
 export const authLink = setContext(async (_, { headers }) => {
@@ -59,19 +56,5 @@ export const fullLink = ApolloLink.split(
     );
   },
   wsLink,
-  httpLink
+  httpLink,
 );
-
-export const errorLink = onError(({ graphQLErrors, networkError }) => {
-  if (graphQLErrors) {
-    for (const err of graphQLErrors) {
-      if (err.message === JWT_EXPIRED_ERROR) {
-        console.log("JWT expired");
-      }
-    }
-  }
-
-  if (networkError) {
-    console.log(`[Network error]: ${networkError}`);
-  }
-});
