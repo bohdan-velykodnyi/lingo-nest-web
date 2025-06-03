@@ -13,6 +13,8 @@ import { TabsList } from "@radix-ui/react-tabs";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 
+import { ReactComponent as Logo } from "./logo.svg";
+
 type ActiveTab = "login" | "registration";
 
 export const AuthLayout = () => {
@@ -23,9 +25,12 @@ export const AuthLayout = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-lg border h-[498px]">
+      <Card className="w-full max-w-md shadow-lg border h-[570px]">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-3xl font-bold">Lingo Nest</CardTitle>
+          <div className=" items-center justify-center justify-items-center ">
+            <Logo className="w-[100px]" />
+            <CardTitle className="text-2xl font-bold ">Lingo Nest</CardTitle>
+          </div>
           <CardDescription>
             Sign in or create an account to get started
           </CardDescription>
