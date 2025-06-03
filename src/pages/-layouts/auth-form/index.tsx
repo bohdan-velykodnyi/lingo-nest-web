@@ -1,4 +1,4 @@
-import { useStaticData } from "@/shared/lib/useStaticData";
+import { useStaticData } from "@/shared/lib";
 import { navigation } from "@/shared/navigation";
 import { CardContent, CardFooter } from "@/shared/ui/kit/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/kit/tabs";

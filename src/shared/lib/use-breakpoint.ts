@@ -10,11 +10,11 @@ export const breakpoints = {
   "2xl": 1920,
 };
 
-export function useBreakpoint<K extends string>(breakpointKey: K) {
+export const useBreakpoint = <K extends string>(breakpointKey: K) => {
   const breakpointValue =
     breakpoints[breakpointKey as keyof typeof breakpoints];
 
-  const bool = useMediaQuery(
+  const matches = useMediaQuery(
     `(max-width: ${breakpointValue}px) and (not (width: ${breakpointValue}px))`,
     {
       initializeWithValue: window.innerWidth <= breakpointValue,
@@ -29,7 +29,7 @@ export function useBreakpoint<K extends string>(breakpointKey: K) {
 
   return {
     [breakpointKey]: Number(String(breakpointValue).replace(/\D/g, "")),
-    [`isAbove${capitalizedKey}`]: !bool,
-    [`isBelow${capitalizedKey}`]: bool,
+    [`isAbove${capitalizedKey}`]: !matches,
+    [`isBelow${capitalizedKey}`]: matches,
   } as Record<K, number> & Record<KeyAbove | KeyBelow, boolean>;
-}
+};

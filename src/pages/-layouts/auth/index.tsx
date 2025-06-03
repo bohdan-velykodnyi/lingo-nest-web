@@ -1,7 +1,7 @@
+import { Logo } from "@/shared/icons";
 import { Card, CardHeader, CardTitle } from "@/shared/ui/kit/card";
 import { Outlet } from "@tanstack/react-router";
 
-import { ReactComponent as Logo } from "./ui/logo.svg";
 import { ThemeSwitcher } from "./ui/theme-switcher";
 
 export const AuthLayout = () => (

@@ -1,7 +1,8 @@
+import { TeacherLayout } from "@/pages/-layouts";
 import { teacherGuard } from "@/shared/guards";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_inner/teacher")({
-  component: Outlet,
+  component: TeacherLayout,
   beforeLoad: teacherGuard,
 });

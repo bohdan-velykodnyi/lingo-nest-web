@@ -1,5 +1,5 @@
 import { type Theme, ThemeProviderContext } from "@/shared/model/theme";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
   );
 
   useEffect(() => {
@@ -35,6 +35,16 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
+  const toggleTheme = useCallback(() => {
+    if (theme === "dark") {
+      setTheme("light");
+    } else if (theme === "light") {
+      setTheme("system");
+    } else {
+      setTheme("dark");
+    }
+  }, [theme]);
+
   const value = useMemo(
     () => ({
       theme,
@@ -42,8 +52,9 @@ export function ThemeProvider({
         localStorage.setItem(storageKey, theme);
         setTheme(theme);
       },
+      toggleTheme,
     }),
-    [theme, storageKey]
+    [theme, toggleTheme, storageKey],
   );
 
   return (
