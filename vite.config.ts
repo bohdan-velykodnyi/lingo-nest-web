@@ -12,7 +12,7 @@ export default defineConfig({
       target: "react",
       autoCodeSplitting: true,
       routesDirectory: "src/pages",
-      generatedRouteTree: "src/app/routerTree.gen.ts",
+      generatedRouteTree: "src/shared/router/routerTree.gen.ts",
     }),
     react(),
     tsconfigPaths(),

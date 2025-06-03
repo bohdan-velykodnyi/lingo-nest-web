@@ -4,6 +4,7 @@ import {
   refreshTokens,
   setTokens,
 } from "@/shared/model/tokens";
+import { router } from "@/shared/router";
 import { fromPromise, type Operation } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
@@ -24,10 +25,11 @@ const getNewToken = async () => {
     isRefreshProcessStarted = true;
     const tokens = await refreshTokens();
 
-    setTokens(await refreshTokens());
+    setTokens(tokens);
     resolvePendingRequests(tokens.accessToken);
   } catch {
     clearTokens();
+    router.invalidate();
   } finally {
     isRefreshProcessStarted = false;
   }
@@ -58,13 +60,10 @@ export const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   for (const err of graphQLErrors) {
     switch (err.message) {
       case JWT_EXPIRED_ERROR:
-        if (operation.operationName === "refreshTokens") {
+        if (operation.operationName === "refreshTokens" || !getRefreshToken()) {
           clearTokens();
-          return forward(operation);
-        }
-
-        if (!getRefreshToken()) {
-          return forward(operation);
+          router.invalidate();
+          return undefined;
         }
 
         if (!isRefreshProcessStarted) {

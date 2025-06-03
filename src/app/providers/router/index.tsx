@@ -1,8 +1,5 @@
-import { routeTree } from "@/app/routerTree.gen";
-import {
-  createRouter,
-  RouterProvider as TanStackRouterProvider,
-} from "@tanstack/react-router";
+import { router } from "@/shared/router";
+import { RouterProvider as TanStackRouterProvider } from "@tanstack/react-router";
 
 declare module "@tanstack/react-router" {
   interface Register {
@@ -15,7 +12,5 @@ declare module "@tanstack/react-router" {
     };
   }
 }
-
-const router = createRouter({ routeTree });
 
 export const RouterProvider = () => <TanStackRouterProvider router={router} />;

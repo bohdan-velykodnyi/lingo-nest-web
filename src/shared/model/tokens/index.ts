@@ -3,7 +3,7 @@ import { CONFIG } from "@/shared/config";
 const ACCESS_TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
 
-const REFRESH_TOKEN_STR = `
+const REFRESH_TOKEN_MUTATION = `
 mutation refreshTokens ($refresh_token: String!) {
   refreshTokens(refresh_token: $refresh_token) {
     access_token
@@ -39,7 +39,7 @@ export const refreshTokens = async () => {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify({
-        query: REFRESH_TOKEN_STR,
+        query: REFRESH_TOKEN_MUTATION,
         variables: {
           refresh_token,
         },

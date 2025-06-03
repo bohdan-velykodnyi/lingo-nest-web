@@ -1,2 +1,3 @@
-export * from "./auth/index.tsx";
-export * from "./auth-form/index.tsx";
+export * from "./auth";
+export * from "./auth-form";
+export * from "./root";

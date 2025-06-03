@@ -1,6 +1,8 @@
 import { graphql } from "@/shared/api";
 import { setTokens } from "@/shared/model/tokens";
+import { navigation } from "@/shared/navigation";
 import { useMutation } from "@apollo/client";
+import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 const LOGIN = graphql(/* GraphQL */ `
@@ -12,14 +14,20 @@ const LOGIN = graphql(/* GraphQL */ `
   }
 `);
 
-export const useLoginMutation = (markFormInvalid: () => void) =>
-  useMutation(LOGIN, {
+export const useLoginMutation = (markFormInvalid: () => void) => {
+  const navigate = useNavigate();
+
+  return useMutation(LOGIN, {
     onCompleted: (data) => {
       const { access_token, refresh_token } = data.login;
 
       setTokens({
         accessToken: access_token,
         refreshToken: refresh_token,
+      });
+
+      navigate({
+        to: navigation.teacher.dashboard,
       });
     },
     onError: (error) => {
@@ -34,3 +42,4 @@ export const useLoginMutation = (markFormInvalid: () => void) =>
       markFormInvalid();
     },
   });
+};
