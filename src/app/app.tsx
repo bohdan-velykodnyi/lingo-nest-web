@@ -1,8 +1,10 @@
+import { Auth } from "@/pages/auth";
+import { ThemeProvider } from "./providers/theme";
+
 export const App = () => {
   return (
-    <div>
-      <h1>My App</h1>
-      <p>This is a simple React app.</p>
-    </div>
+    <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
+      <Auth />
+    </ThemeProvider>
   );
 };

@@ -18,7 +18,7 @@ export const eslintBoundariesConfig = {
       },
       {
         type: "pages",
-        pattern: "./src/app/pages/*",
+        pattern: "./src/pages/*",
       },
       {
         type: "features",
@@ -42,13 +42,31 @@ export const eslintBoundariesConfig = {
         rules: [
           {
             from: "shared",
-            disallow: ["app", "features", "entities", "pages"],
+            disallow: ["app", "pages", "widgets", "features", "entities"],
+            message:
+              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+          },
+          {
+            from: "entities",
+            disallow: ["app", "pages", "widgets", "features"],
             message:
               "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
           },
           {
             from: "features",
+            disallow: ["app", "pages", "widgets"],
+            message:
+              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+          },
+          {
+            from: "widgets",
             disallow: ["app", "pages"],
+            message:
+              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+          },
+          {
+            from: "pages",
+            disallow: ["app"],
             message:
               "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
           },
