@@ -1,3 +1,4 @@
+import { UserRole } from "@/shared/api/graphql";
 import { Button } from "@/shared/ui/kit/button";
 import {
   Form,
@@ -5,13 +6,14 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
 import { Label } from "@/shared/ui/kit/label";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/kit/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { useRegistrationMutation } from "../api/registration.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
@@ -25,11 +27,35 @@ export const RegistrationForm = () => {
     },
   });
 
-  const { isLoading, mutate } = useRegistrationMutation();
+  const [role, setRole] = useState<UserRole>(UserRole.Teacher);
+
+  const [registration, { loading }] = useRegistrationMutation(() => {
+    form.setError("email", {});
+    form.setError("password", {});
+  });
+
+  useEffect(() => {
+    if (form.formState.errors.email) {
+      toast.error(form.formState.errors.email.message);
+    }
+    if (form.formState.errors.password) {
+      toast.error(form.formState.errors.password.message);
+    }
+  }, [form.formState.errors]);
+
+  const onSubmit: SubmitHandler<AuthFormValues> = ({ email, password }) => {
+    registration({
+      variables: {
+        email,
+        password,
+        role,
+      },
+    });
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(mutate)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="email"
@@ -39,7 +65,6 @@ export const RegistrationForm = () => {
               <FormControl>
                 <Input placeholder="name@example.com" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -53,18 +78,21 @@ export const RegistrationForm = () => {
               <FormControl>
                 <Input type="password" placeholder="••••••••" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
 
-        <RadioGroup className="flex h-8">
+        <RadioGroup
+          className="flex h-8"
+          onValueChange={(value) => setRole(value as UserRole)}
+          value={role}
+        >
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="teacher" id="r1" />
+            <RadioGroupItem value={UserRole.Teacher} id="r1" />
             <Label htmlFor="r1">Teacher</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="student" id="r2" />
+            <RadioGroupItem value={UserRole.Student} id="r2" />
             <Label htmlFor="r2">Student</Label>
           </div>
         </RadioGroup>
@@ -72,9 +100,9 @@ export const RegistrationForm = () => {
         <Button
           type="submit"
           className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white self-end"
-          disabled={isLoading}
+          disabled={loading}
         >
-          {isLoading ? "Signing up..." : "Sign up"}
+          {loading ? "Signing up..." : "Sign up"}
         </Button>
       </form>
     </Form>

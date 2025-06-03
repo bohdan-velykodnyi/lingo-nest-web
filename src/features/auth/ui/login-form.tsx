@@ -5,11 +5,12 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import { useLoginMutation } from "../api/login.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
@@ -23,7 +24,10 @@ export const LoginForm = () => {
     },
   });
 
-  const [login, { loading }] = useLoginMutation();
+  const [login, { loading }] = useLoginMutation(() => {
+    form.setError("email", {});
+    form.setError("password", {});
+  });
 
   const onSubmit: SubmitHandler<AuthFormValues> = ({ email, password }) => {
     login({
@@ -33,6 +37,15 @@ export const LoginForm = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (form.formState.errors.email) {
+      toast.error(form.formState.errors.email.message);
+    }
+    if (form.formState.errors.password) {
+      toast.error(form.formState.errors.password.message);
+    }
+  }, [form.formState.errors]);
 
   return (
     <Form {...form}>
@@ -46,7 +59,6 @@ export const LoginForm = () => {
               <FormControl>
                 <Input placeholder="name@example.com" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -60,7 +72,6 @@ export const LoginForm = () => {
               <FormControl>
                 <Input type="password" placeholder="••••••••" {...field} />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />

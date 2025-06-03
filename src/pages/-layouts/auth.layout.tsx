@@ -1,5 +1,3 @@
-import { useTheme } from "@/shared/model/theme";
-import { Button } from "@/shared/ui/kit/button";
 import {
   Card,
   CardContent,
@@ -8,27 +6,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/kit/card";
-import { Tabs, TabsContent, TabsTrigger } from "@/shared/ui/kit/tabs";
-import { TabsList } from "@radix-ui/react-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/kit/tabs";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { ReactComponent as Logo } from "./logo.svg";
+import { ThemeSwitcher } from "./theme-switcher";
 
 type ActiveTab = "login" | "registration";
 
 export const AuthLayout = () => {
-  const [activeTab, setActiveTab] = useState<ActiveTab>("login");
-  const { theme, setTheme } = useTheme();
   const location = useLocation();
-  const currentPath = location.pathname.split("/").pop() || "";
+  const currentPath = location.pathname.split("/").pop() as ActiveTab;
+  const [activeTab, setActiveTab] = useState<ActiveTab>(currentPath);
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center p-4 ">
       <Card className="w-full max-w-md shadow-lg border h-[570px]">
         <CardHeader className="space-y-1 text-center">
           <div className=" items-center justify-center justify-items-center ">
-            <Logo className="w-[100px]" />
+            <Logo className="w-[100px] [&_g]:!fill-[#4f46e5] dark:[&_g]:!fill-[#818cf8]" />
             <CardTitle className="text-2xl font-bold ">Lingo Nest</CardTitle>
           </div>
           <CardDescription>
@@ -62,16 +59,20 @@ export const AuthLayout = () => {
         </CardContent>
         <CardFooter className="flex flex-col space-y-2 text-center text-sm">
           <p>
-            By continuing, you agree to our Terms of Service and Privacy Policy.
+            By continuing, you agree to our{" "}
+            <Link to="/terms-and-conditions" className="text-primary">
+              Terms and Conditions
+            </Link>{" "}
+            and{" "}
+            <Link to="/privacy-policy" className="text-primary">
+              Privacy Policy
+            </Link>
+            .
           </p>
         </CardFooter>
       </Card>
-      <Button
-        className="fixed bottom-4 right-4"
-        onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      >
-        Switch theme
-      </Button>
+
+      <ThemeSwitcher />
     </div>
   );
 };
