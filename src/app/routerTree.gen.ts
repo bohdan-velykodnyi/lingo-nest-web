@@ -14,8 +14,10 @@ import { Route as rootRoute } from "./../pages/__root";
 import { Route as AuthRouteImport } from "./../pages/auth/route";
 import { Route as IndexImport } from "./../pages/index";
 import { Route as AuthIndexImport } from "./../pages/auth/index";
-import { Route as AuthRegistrationImport } from "./../pages/auth/registration";
-import { Route as AuthLoginImport } from "./../pages/auth/login";
+import { Route as AuthForgotPasswordImport } from "./../pages/auth/forgot-password";
+import { Route as AuthAuthFormRouteImport } from "./../pages/auth/_auth-form/route";
+import { Route as AuthAuthFormRegistrationImport } from "./../pages/auth/_auth-form/registration";
+import { Route as AuthAuthFormLoginImport } from "./../pages/auth/_auth-form/login";
 
 // Create/Update Routes
 
@@ -37,16 +39,27 @@ const AuthIndexRoute = AuthIndexImport.update({
   getParentRoute: () => AuthRouteRoute,
 } as any);
 
-const AuthRegistrationRoute = AuthRegistrationImport.update({
-  id: "/registration",
-  path: "/registration",
+const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
+  id: "/forgot-password",
+  path: "/forgot-password",
   getParentRoute: () => AuthRouteRoute,
 } as any);
 
-const AuthLoginRoute = AuthLoginImport.update({
+const AuthAuthFormRouteRoute = AuthAuthFormRouteImport.update({
+  id: "/_auth-form",
+  getParentRoute: () => AuthRouteRoute,
+} as any);
+
+const AuthAuthFormRegistrationRoute = AuthAuthFormRegistrationImport.update({
+  id: "/registration",
+  path: "/registration",
+  getParentRoute: () => AuthAuthFormRouteRoute,
+} as any);
+
+const AuthAuthFormLoginRoute = AuthAuthFormLoginImport.update({
   id: "/login",
   path: "/login",
-  getParentRoute: () => AuthRouteRoute,
+  getParentRoute: () => AuthAuthFormRouteRoute,
 } as any);
 
 // Populate the FileRoutesByPath interface
@@ -67,18 +80,18 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthRouteImport;
       parentRoute: typeof rootRoute;
     };
-    "/auth/login": {
-      id: "/auth/login";
-      path: "/login";
-      fullPath: "/auth/login";
-      preLoaderRoute: typeof AuthLoginImport;
+    "/auth/_auth-form": {
+      id: "/auth/_auth-form";
+      path: "";
+      fullPath: "/auth";
+      preLoaderRoute: typeof AuthAuthFormRouteImport;
       parentRoute: typeof AuthRouteImport;
     };
-    "/auth/registration": {
-      id: "/auth/registration";
-      path: "/registration";
-      fullPath: "/auth/registration";
-      preLoaderRoute: typeof AuthRegistrationImport;
+    "/auth/forgot-password": {
+      id: "/auth/forgot-password";
+      path: "/forgot-password";
+      fullPath: "/auth/forgot-password";
+      preLoaderRoute: typeof AuthForgotPasswordImport;
       parentRoute: typeof AuthRouteImport;
     };
     "/auth/": {
@@ -88,20 +101,47 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthIndexImport;
       parentRoute: typeof AuthRouteImport;
     };
+    "/auth/_auth-form/login": {
+      id: "/auth/_auth-form/login";
+      path: "/login";
+      fullPath: "/auth/login";
+      preLoaderRoute: typeof AuthAuthFormLoginImport;
+      parentRoute: typeof AuthAuthFormRouteImport;
+    };
+    "/auth/_auth-form/registration": {
+      id: "/auth/_auth-form/registration";
+      path: "/registration";
+      fullPath: "/auth/registration";
+      preLoaderRoute: typeof AuthAuthFormRegistrationImport;
+      parentRoute: typeof AuthAuthFormRouteImport;
+    };
   }
 }
 
 // Create and export the route tree
 
+interface AuthAuthFormRouteRouteChildren {
+  AuthAuthFormLoginRoute: typeof AuthAuthFormLoginRoute;
+  AuthAuthFormRegistrationRoute: typeof AuthAuthFormRegistrationRoute;
+}
+
+const AuthAuthFormRouteRouteChildren: AuthAuthFormRouteRouteChildren = {
+  AuthAuthFormLoginRoute: AuthAuthFormLoginRoute,
+  AuthAuthFormRegistrationRoute: AuthAuthFormRegistrationRoute,
+};
+
+const AuthAuthFormRouteRouteWithChildren =
+  AuthAuthFormRouteRoute._addFileChildren(AuthAuthFormRouteRouteChildren);
+
 interface AuthRouteRouteChildren {
-  AuthLoginRoute: typeof AuthLoginRoute;
-  AuthRegistrationRoute: typeof AuthRegistrationRoute;
+  AuthAuthFormRouteRoute: typeof AuthAuthFormRouteRouteWithChildren;
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute;
   AuthIndexRoute: typeof AuthIndexRoute;
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
-  AuthLoginRoute: AuthLoginRoute,
-  AuthRegistrationRoute: AuthRegistrationRoute,
+  AuthAuthFormRouteRoute: AuthAuthFormRouteRouteWithChildren,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
   AuthIndexRoute: AuthIndexRoute,
 };
 
@@ -111,40 +151,57 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
-  "/auth": typeof AuthRouteRouteWithChildren;
-  "/auth/login": typeof AuthLoginRoute;
-  "/auth/registration": typeof AuthRegistrationRoute;
+  "/auth": typeof AuthAuthFormRouteRouteWithChildren;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
   "/auth/": typeof AuthIndexRoute;
+  "/auth/login": typeof AuthAuthFormLoginRoute;
+  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
 }
 
 export interface FileRoutesByTo {
   "/": typeof IndexRoute;
-  "/auth/login": typeof AuthLoginRoute;
-  "/auth/registration": typeof AuthRegistrationRoute;
   "/auth": typeof AuthIndexRoute;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/login": typeof AuthAuthFormLoginRoute;
+  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute;
   "/": typeof IndexRoute;
   "/auth": typeof AuthRouteRouteWithChildren;
-  "/auth/login": typeof AuthLoginRoute;
-  "/auth/registration": typeof AuthRegistrationRoute;
+  "/auth/_auth-form": typeof AuthAuthFormRouteRouteWithChildren;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
   "/auth/": typeof AuthIndexRoute;
+  "/auth/_auth-form/login": typeof AuthAuthFormLoginRoute;
+  "/auth/_auth-form/registration": typeof AuthAuthFormRegistrationRoute;
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/auth" | "/auth/login" | "/auth/registration" | "/auth/";
+  fullPaths:
+    | "/"
+    | "/auth"
+    | "/auth/forgot-password"
+    | "/auth/"
+    | "/auth/login"
+    | "/auth/registration";
   fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/auth/login" | "/auth/registration" | "/auth";
+  to:
+    | "/"
+    | "/auth"
+    | "/auth/forgot-password"
+    | "/auth/login"
+    | "/auth/registration";
   id:
     | "__root__"
     | "/"
     | "/auth"
-    | "/auth/login"
-    | "/auth/registration"
-    | "/auth/";
+    | "/auth/_auth-form"
+    | "/auth/forgot-password"
+    | "/auth/"
+    | "/auth/_auth-form/login"
+    | "/auth/_auth-form/registration";
   fileRoutesById: FileRoutesById;
 }
 
@@ -178,22 +235,34 @@ export const routeTree = rootRoute
     "/auth": {
       "filePath": "auth/route.tsx",
       "children": [
-        "/auth/login",
-        "/auth/registration",
+        "/auth/_auth-form",
+        "/auth/forgot-password",
         "/auth/"
       ]
     },
-    "/auth/login": {
-      "filePath": "auth/login.tsx",
-      "parent": "/auth"
+    "/auth/_auth-form": {
+      "filePath": "auth/_auth-form/route.tsx",
+      "parent": "/auth",
+      "children": [
+        "/auth/_auth-form/login",
+        "/auth/_auth-form/registration"
+      ]
     },
-    "/auth/registration": {
-      "filePath": "auth/registration.tsx",
+    "/auth/forgot-password": {
+      "filePath": "auth/forgot-password.tsx",
       "parent": "/auth"
     },
     "/auth/": {
       "filePath": "auth/index.tsx",
       "parent": "/auth"
+    },
+    "/auth/_auth-form/login": {
+      "filePath": "auth/_auth-form/login.tsx",
+      "parent": "/auth/_auth-form"
+    },
+    "/auth/_auth-form/registration": {
+      "filePath": "auth/_auth-form/registration.tsx",
+      "parent": "/auth/_auth-form"
     }
   }
 }

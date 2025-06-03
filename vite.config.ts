@@ -27,4 +27,7 @@ export default defineConfig({
       exclude: "**/*.svg?default",
     }),
   ],
+  server: {
+    port: 3030,
+  },
 });

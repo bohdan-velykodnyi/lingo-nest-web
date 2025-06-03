@@ -1,6 +1,6 @@
 import { useTheme } from "@/shared/model/theme";
 import { Button } from "@/shared/ui/kit/button";
-import { HalfMoon, Prohibition, SunLight } from "iconoir-react";
+import { Moon, Sun, SunMoon } from "lucide-react";
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
@@ -21,9 +21,9 @@ export const ThemeSwitcher = () => {
       className="rounded-full absolute bottom-4 left-4 w-15 h-15"
       onClick={chooseTheme}
     >
-      {theme === "light" && <SunLight className="size-5" />}
-      {theme === "dark" && <HalfMoon className="size-5" />}
-      {theme === "system" && <Prohibition className="size-5" />}
+      {theme === "light" && <Sun className="size-5" />}
+      {theme === "dark" && <Moon className="size-5" />}
+      {theme === "system" && <SunMoon className="size-5" />}
     </Button>
   );
 };

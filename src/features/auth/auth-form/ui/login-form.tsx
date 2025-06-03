@@ -8,12 +8,13 @@ import {
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { useLoginMutation } from "../api/login.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
+import { navigation } from "@/shared/navigation";
 
 export const LoginForm = () => {
   const form = useForm<AuthFormValues>({
@@ -38,18 +39,24 @@ export const LoginForm = () => {
     });
   };
 
-  useEffect(() => {
-    if (form.formState.errors.email) {
-      toast.error(form.formState.errors.email.message);
+  const onInvalid = () => {
+    const emailError = form.getFieldState("email").error?.message;
+    const passwordError = form.getFieldState("password").error?.message;
+
+    if (emailError) {
+      toast.error(emailError);
     }
-    if (form.formState.errors.password) {
-      toast.error(form.formState.errors.password.message);
+    if (passwordError) {
+      toast.error(passwordError);
     }
-  }, [form.formState.errors]);
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 h-full">
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        className="space-y-4 h-full"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -76,9 +83,16 @@ export const LoginForm = () => {
           )}
         />
 
-        <Button variant="link" className="px-0 font-normal " size="sm">
-          Forgot password?
-        </Button>
+        <Link to={navigation.auth.forgotPassword}>
+          <Button
+            variant="link"
+            className="px-0 font-normal mb-4"
+            size="sm"
+            type="button"
+          >
+            Forgot password?
+          </Button>
+        </Link>
 
         <Button
           type="submit"

@@ -11,7 +11,7 @@ import { Input } from "@/shared/ui/kit/input";
 import { Label } from "@/shared/ui/kit/label";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/kit/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -34,15 +34,6 @@ export const RegistrationForm = () => {
     form.setError("password", {});
   });
 
-  useEffect(() => {
-    if (form.formState.errors.email) {
-      toast.error(form.formState.errors.email.message);
-    }
-    if (form.formState.errors.password) {
-      toast.error(form.formState.errors.password.message);
-    }
-  }, [form.formState.errors]);
-
   const onSubmit: SubmitHandler<AuthFormValues> = ({ email, password }) => {
     registration({
       variables: {
@@ -53,9 +44,24 @@ export const RegistrationForm = () => {
     });
   };
 
+  const onInvalid = () => {
+    const emailError = form.getFieldState("email").error?.message;
+    const passwordError = form.getFieldState("password").error?.message;
+
+    if (emailError) {
+      toast.error(emailError);
+    }
+    if (passwordError) {
+      toast.error(passwordError);
+    }
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit, onInvalid)}
+        className="space-y-4"
+      >
         <FormField
           control={form.control}
           name="email"
