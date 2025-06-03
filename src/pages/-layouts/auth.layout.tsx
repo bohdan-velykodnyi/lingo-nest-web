@@ -10,15 +10,16 @@ import {
 } from "@/shared/ui/kit/card";
 import { Tabs, TabsContent, TabsTrigger } from "@/shared/ui/kit/tabs";
 import { TabsList } from "@radix-ui/react-tabs";
+import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { LoginForm } from "./login-form";
-import { RegisterForm } from "./register-form";
+type ActiveTab = "login" | "registration";
 
 export const AuthLayout = () => {
-  const [activeTab, setActiveTab] = useState<string>("login");
-
+  const [activeTab, setActiveTab] = useState<ActiveTab>("login");
   const { theme, setTheme } = useTheme();
+  const location = useLocation();
+  const currentPath = location.pathname.split("/").pop() || "";
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
@@ -33,18 +34,24 @@ export const AuthLayout = () => {
           <Tabs
             defaultValue="login"
             value={activeTab}
-            onValueChange={setActiveTab}
+            onValueChange={(value) => setActiveTab(value as ActiveTab)}
             className="h-full"
           >
             <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Register</TabsTrigger>
+              <Link to="/auth/login" className="w-full">
+                <TabsTrigger value="login" className="w-full">
+                  Login
+                </TabsTrigger>
+              </Link>
+              <Link to="/auth/registration" className="w-full">
+                <TabsTrigger value="registration" className="w-full">
+                  Registration
+                </TabsTrigger>
+              </Link>
             </TabsList>
-            <TabsContent value="login">
-              <LoginForm />
-            </TabsContent>
-            <TabsContent value="register">
-              <RegisterForm />
+
+            <TabsContent value={currentPath}>
+              <Outlet />
             </TabsContent>
           </Tabs>
         </CardContent>

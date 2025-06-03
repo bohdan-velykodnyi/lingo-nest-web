@@ -13,10 +13,10 @@ import { RadioGroup, RadioGroupItem } from "@/shared/ui/kit/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { useRegisterMutation } from "../api/register.mutation";
+import { useRegistrationMutation } from "../api/registration.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
 
-export const RegisterForm = () => {
+export const RegistrationForm = () => {
   const form = useForm<AuthFormValues>({
     resolver: zodResolver(authSchema),
     defaultValues: {
@@ -25,7 +25,7 @@ export const RegisterForm = () => {
     },
   });
 
-  const { isLoading, mutate } = useRegisterMutation();
+  const { isLoading, mutate } = useRegistrationMutation();
 
   return (
     <Form {...form}>
