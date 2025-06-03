@@ -14,6 +14,7 @@ import { Route as rootRoute } from "./../pages/__root";
 import { Route as AuthRouteImport } from "./../pages/auth/route";
 import { Route as IndexImport } from "./../pages/index";
 import { Route as AuthIndexImport } from "./../pages/auth/index";
+import { Route as AuthResetPasswordImport } from "./../pages/auth/reset-password";
 import { Route as AuthForgotPasswordImport } from "./../pages/auth/forgot-password";
 import { Route as AuthAuthFormRouteImport } from "./../pages/auth/_auth-form/route";
 import { Route as AuthAuthFormRegistrationImport } from "./../pages/auth/_auth-form/registration";
@@ -36,6 +37,12 @@ const IndexRoute = IndexImport.update({
 const AuthIndexRoute = AuthIndexImport.update({
   id: "/",
   path: "/",
+  getParentRoute: () => AuthRouteRoute,
+} as any);
+
+const AuthResetPasswordRoute = AuthResetPasswordImport.update({
+  id: "/reset-password",
+  path: "/reset-password",
   getParentRoute: () => AuthRouteRoute,
 } as any);
 
@@ -94,6 +101,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof AuthForgotPasswordImport;
       parentRoute: typeof AuthRouteImport;
     };
+    "/auth/reset-password": {
+      id: "/auth/reset-password";
+      path: "/reset-password";
+      fullPath: "/auth/reset-password";
+      preLoaderRoute: typeof AuthResetPasswordImport;
+      parentRoute: typeof AuthRouteImport;
+    };
     "/auth/": {
       id: "/auth/";
       path: "/";
@@ -136,12 +150,14 @@ const AuthAuthFormRouteRouteWithChildren =
 interface AuthRouteRouteChildren {
   AuthAuthFormRouteRoute: typeof AuthAuthFormRouteRouteWithChildren;
   AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute;
+  AuthResetPasswordRoute: typeof AuthResetPasswordRoute;
   AuthIndexRoute: typeof AuthIndexRoute;
 }
 
 const AuthRouteRouteChildren: AuthRouteRouteChildren = {
   AuthAuthFormRouteRoute: AuthAuthFormRouteRouteWithChildren,
   AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthResetPasswordRoute: AuthResetPasswordRoute,
   AuthIndexRoute: AuthIndexRoute,
 };
 
@@ -153,6 +169,7 @@ export interface FileRoutesByFullPath {
   "/": typeof IndexRoute;
   "/auth": typeof AuthAuthFormRouteRouteWithChildren;
   "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
   "/auth/": typeof AuthIndexRoute;
   "/auth/login": typeof AuthAuthFormLoginRoute;
   "/auth/registration": typeof AuthAuthFormRegistrationRoute;
@@ -162,6 +179,7 @@ export interface FileRoutesByTo {
   "/": typeof IndexRoute;
   "/auth": typeof AuthIndexRoute;
   "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
   "/auth/login": typeof AuthAuthFormLoginRoute;
   "/auth/registration": typeof AuthAuthFormRegistrationRoute;
 }
@@ -172,6 +190,7 @@ export interface FileRoutesById {
   "/auth": typeof AuthRouteRouteWithChildren;
   "/auth/_auth-form": typeof AuthAuthFormRouteRouteWithChildren;
   "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
   "/auth/": typeof AuthIndexRoute;
   "/auth/_auth-form/login": typeof AuthAuthFormLoginRoute;
   "/auth/_auth-form/registration": typeof AuthAuthFormRegistrationRoute;
@@ -183,6 +202,7 @@ export interface FileRouteTypes {
     | "/"
     | "/auth"
     | "/auth/forgot-password"
+    | "/auth/reset-password"
     | "/auth/"
     | "/auth/login"
     | "/auth/registration";
@@ -191,6 +211,7 @@ export interface FileRouteTypes {
     | "/"
     | "/auth"
     | "/auth/forgot-password"
+    | "/auth/reset-password"
     | "/auth/login"
     | "/auth/registration";
   id:
@@ -199,6 +220,7 @@ export interface FileRouteTypes {
     | "/auth"
     | "/auth/_auth-form"
     | "/auth/forgot-password"
+    | "/auth/reset-password"
     | "/auth/"
     | "/auth/_auth-form/login"
     | "/auth/_auth-form/registration";
@@ -237,6 +259,7 @@ export const routeTree = rootRoute
       "children": [
         "/auth/_auth-form",
         "/auth/forgot-password",
+        "/auth/reset-password",
         "/auth/"
       ]
     },
@@ -250,6 +273,10 @@ export const routeTree = rootRoute
     },
     "/auth/forgot-password": {
       "filePath": "auth/forgot-password.tsx",
+      "parent": "/auth"
+    },
+    "/auth/reset-password": {
+      "filePath": "auth/reset-password.tsx",
       "parent": "/auth"
     },
     "/auth/": {

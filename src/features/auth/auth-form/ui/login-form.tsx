@@ -1,3 +1,4 @@
+import { navigation } from "@/shared/navigation";
 import { Button } from "@/shared/ui/kit/button";
 import {
   Form,
@@ -14,7 +15,6 @@ import { toast } from "sonner";
 
 import { useLoginMutation } from "../api/login.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
-import { navigation } from "@/shared/navigation";
 
 export const LoginForm = () => {
   const form = useForm<AuthFormValues>({
