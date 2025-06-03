@@ -18,7 +18,7 @@ export const ThemeSwitcher = () => {
   return (
     <Button
       variant="outline"
-      className="rounded-full absolute bottom-4 left-4 w-15 h-15"
+      className="rounded-full absolute bottom-4 right-4 lg:left-4 w-15 h-15"
       onClick={chooseTheme}
     >
       {theme === "light" && <Sun className="size-5" />}

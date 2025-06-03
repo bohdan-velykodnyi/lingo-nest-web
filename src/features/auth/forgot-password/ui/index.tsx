@@ -45,7 +45,7 @@ export const ForgotPassword = () => {
   };
 
   return (
-    <div className="h-full grid content-center gap-5 mb-5">
+    <div className="h-full grid content-start lg:content-center gap-5 lg:mb-5">
       <div className="flex gap-3 px-6">
         <Link to={navigation.auth.login}>
           <Button size="icon" variant="outline">

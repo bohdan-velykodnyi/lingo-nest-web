@@ -13,7 +13,7 @@ export const AuthFormLayout = () => {
 
   return (
     <>
-      <CardContent className="h-full">
+      <CardContent className="lg:h-full">
         <Tabs
           defaultValue="login"
           value={activeTab}
@@ -39,7 +39,7 @@ export const AuthFormLayout = () => {
         </Tabs>
       </CardContent>
 
-      <CardFooter className="flex flex-col space-y-2 text-center text-sm">
+      <CardFooter className="flex flex-col space-y-2 text-center text-sm ">
         <p>
           By continuing, you agree to our{" "}
           <Link to="/" className="text-primary">
