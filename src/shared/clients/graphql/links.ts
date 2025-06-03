@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CONFIG } from "@/shared/config.ts";
 import { ApolloLink, HttpLink } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
@@ -17,11 +18,10 @@ export const wsLink = new GraphQLWsLink(
     url: CONFIG.WS_BASE_URL,
     shouldRetry: () => true,
     retryAttempts: 5,
-    retryWait: (count) => {
-      return new Promise((resolve) => {
+    retryWait: (count) =>
+      new Promise((resolve) => {
         setTimeout(resolve, Math.min(count * 1000, 30000));
-      });
-    },
+      }),
     lazy: true,
     lazyCloseTimeout: 10000,
     on: {

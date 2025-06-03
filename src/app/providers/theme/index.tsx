@@ -1,5 +1,5 @@
-import { ThemeProviderContext, type Theme } from "@/shared/model/theme";
-import { useEffect, useState } from "react";
+import { type Theme, ThemeProviderContext } from "@/shared/model/theme";
+import { useEffect, useMemo, useState } from "react";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -35,13 +35,16 @@ export function ThemeProvider({
     root.classList.add(theme);
   }, [theme]);
 
-  const value = {
-    theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
-    },
-  };
+  const value = useMemo(
+    () => ({
+      theme,
+      setTheme: (theme: Theme) => {
+        localStorage.setItem(storageKey, theme);
+        setTheme(theme);
+      },
+    }),
+    [theme, storageKey]
+  );
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>

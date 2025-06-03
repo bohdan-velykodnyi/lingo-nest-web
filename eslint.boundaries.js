@@ -21,6 +21,10 @@ export const eslintBoundariesConfig = {
         pattern: "./src/pages/*",
       },
       {
+        type: "widgets",
+        pattern: "./src/widgets/*",
+      },
+      {
         type: "features",
         pattern: "./src/features/*",
       },

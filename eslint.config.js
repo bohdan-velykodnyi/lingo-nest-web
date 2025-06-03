@@ -4,11 +4,21 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { eslintBoundariesConfig } from "./eslint.boundaries.js";
+import pluginRouter from "@tanstack/eslint-plugin-router";
+import importPlugin from "eslint-plugin-import";
+import pluginReact from "eslint-plugin-react";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", "src/shared/ui/*"] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      pluginReact.configs.flat.recommended,
+      ...pluginRouter.configs["flat/recommended"],
+      importPlugin.flatConfigs.recommended,
+    ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
@@ -17,6 +27,14 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
+      "@tanstack/router": pluginRouter,
+      "eslint-plugin-import": importPlugin,
+      "eslint-plugin-react": pluginReact,
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -106,14 +124,14 @@ export default tseslint.config(
         "warn",
         { props: "never", children: "never" },
       ],
-      "import/extensions": [
-        "warn",
-        "ignorePackages",
-        {
-          ts: "always",
-          tsx: "always",
-        },
-      ],
+      // "import/extensions": [
+      //   "warn",
+      //   "ignorePackages",
+      //   {
+      //     ts: "always",
+      //     tsx: "always",
+      //   },
+      // ],
       "import/order": [
         "warn",
         {

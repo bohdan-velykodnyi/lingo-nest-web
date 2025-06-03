@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { LoginForm } from "./login-form";
-import { RegisterForm } from "./register-form";
+import { useTheme } from "@/shared/model/theme";
+import { Button } from "@/shared/ui/kit/button";
 import {
   Card,
   CardContent,
@@ -11,8 +10,10 @@ import {
 } from "@/shared/ui/kit/card";
 import { Tabs, TabsContent, TabsTrigger } from "@/shared/ui/kit/tabs";
 import { TabsList } from "@radix-ui/react-tabs";
-import { Button } from "@/shared/ui/kit/button";
-import { useTheme } from "@/shared/model/theme";
+import { useState } from "react";
+
+import { LoginForm } from "./login-form";
+import { RegisterForm } from "./register-form";
 
 export const AuthLayout = () => {
   const [activeTab, setActiveTab] = useState<string>("login");

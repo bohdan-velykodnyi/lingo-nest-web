@@ -10,6 +10,4 @@ const LOGIN = graphql(/* GraphQL */ `
   }
 `);
 
-export const useLoginMutation = () => {
-  return useMutation(LOGIN);
-};
+export const useLoginMutation = () => useMutation(LOGIN);

@@ -8,10 +8,11 @@ import {
   FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { authSchema, type AuthFormValues } from "../model/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { type SubmitHandler, useForm } from "react-hook-form";
+
 import { useLoginMutation } from "../api/login.mutation";
+import { type AuthFormValues, authSchema } from "../model/auth.schema";
 
 export const LoginForm = () => {
   const form = useForm<AuthFormValues>({

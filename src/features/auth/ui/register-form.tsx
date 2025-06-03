@@ -8,12 +8,13 @@ import {
   FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
-import { useForm } from "react-hook-form";
-import { authSchema, type AuthFormValues } from "../model/auth.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegisterMutation } from "../api/register.mutation";
-import { RadioGroup, RadioGroupItem } from "@/shared/ui/kit/radio-group";
 import { Label } from "@/shared/ui/kit/label";
+import { RadioGroup, RadioGroupItem } from "@/shared/ui/kit/radio-group";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+
+import { useRegisterMutation } from "../api/register.mutation";
+import { type AuthFormValues, authSchema } from "../model/auth.schema";
 
 export const RegisterForm = () => {
   const form = useForm<AuthFormValues>({
