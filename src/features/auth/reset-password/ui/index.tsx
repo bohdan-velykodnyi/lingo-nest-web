@@ -16,7 +16,7 @@ import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useResetPasswordMutation } from "../api/reset-password.mutation";
+import { useResetPasswordMutation } from "../domain/reset-password.mutation";
 import {
   resetPasswordSchema,
   type ResetPasswordValues,

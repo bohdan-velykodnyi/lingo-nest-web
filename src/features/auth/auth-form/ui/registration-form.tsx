@@ -15,7 +15,7 @@ import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useRegistrationMutation } from "../api/registration.mutation";
+import { useRegistrationMutation } from "../domain/registration.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
 
 export const RegistrationForm = () => {

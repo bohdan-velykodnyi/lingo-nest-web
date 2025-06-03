@@ -15,7 +15,7 @@ import { ChevronLeft, Mail } from "lucide-react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useForgotPasswordMutation } from "../api/forgot-password.mutation";
+import { useForgotPasswordMutation } from "../domain/forgot-password.mutation";
 import { emailSchema, type ForgotPasswordValues } from "../model/email.schema";
 
 export const ForgotPassword = () => {

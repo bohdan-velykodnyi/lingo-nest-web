@@ -13,7 +13,7 @@ import { Link } from "@tanstack/react-router";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-import { useLoginMutation } from "../api/login.mutation";
+import { useLoginMutation } from "../domain/login.mutation";
 import { type AuthFormValues, authSchema } from "../model/auth.schema";
 
 export const LoginForm = () => {
