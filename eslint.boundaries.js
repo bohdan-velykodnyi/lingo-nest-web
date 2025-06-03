@@ -94,7 +94,7 @@ export const eslintBoundariesConfig = {
           },
           {
             target: ["pages"],
-            allow: ["*.layout.tsx"],
+            allow: ["**/layout.{ts,tsx}", "**/*.layout.{ts,tsx}", "**"],
           },
         ],
       },

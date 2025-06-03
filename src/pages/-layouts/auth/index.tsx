@@ -10,8 +10,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/kit/tabs";
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 
-import { ReactComponent as Logo } from "./logo.svg";
-import { ThemeSwitcher } from "./theme-switcher";
+import { ReactComponent as Logo } from "./ui/logo.svg";
+import { ThemeSwitcher } from "./ui/theme-switcher";
 
 type ActiveTab = "login" | "registration";
 
