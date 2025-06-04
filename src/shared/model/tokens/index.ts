@@ -12,9 +12,11 @@ mutation refreshTokens ($refresh_token: String!) {
 }
 `;
 
-export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
+export const getAccessToken = () =>
+  localStorage.getItem(ACCESS_TOKEN_KEY) || "";
 
-export const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
+export const getRefreshToken = () =>
+  localStorage.getItem(REFRESH_TOKEN_KEY) || "";
 
 export const setTokens = (tokens: {
   accessToken: string;

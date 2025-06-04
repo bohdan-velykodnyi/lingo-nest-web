@@ -8,7 +8,7 @@ import {
 import { Link, useLocation } from "@tanstack/react-router";
 
 import { SidebarThemeSwitcher } from "./sidebar-theme-switcher";
-import { navList } from "../model/nav-list.const";
+import { navSidebarList } from "../model/nav-sidebar-list.const";
 
 export const SidebarList = () => {
   const { pathname } = useLocation();
@@ -17,7 +17,7 @@ export const SidebarList = () => {
     <SidebarGroup>
       <SidebarGroupContent>
         <SidebarMenu className="gap-1 px-2">
-          {navList.map((item) => (
+          {navSidebarList.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
                 asChild

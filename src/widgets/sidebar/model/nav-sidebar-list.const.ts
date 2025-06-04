@@ -1,6 +1,6 @@
 import { Archive, BookOpen, Home, Settings, Users } from "lucide-react";
 
-export const navList = [
+export const navSidebarList = [
   {
     title: "Overview",
     url: "/teacher/dashboard",
