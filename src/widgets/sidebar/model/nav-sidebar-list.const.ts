@@ -1,9 +1,10 @@
+import { navigation } from "@/shared/navigation";
 import { Archive, BookOpen, Home, Settings, Users } from "lucide-react";
 
 export const navSidebarList = [
   {
     title: "Overview",
-    url: "/teacher/dashboard",
+    url: navigation.teacher.dashboard,
     icon: Home,
   },
   {
@@ -13,7 +14,7 @@ export const navSidebarList = [
   },
   {
     title: "Students",
-    url: "/dashboard/contacts",
+    url: navigation.teacher.contacts,
     icon: Users,
   },
   {

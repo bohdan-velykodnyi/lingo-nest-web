@@ -1,3 +1,4 @@
+import { navigation } from "@/shared/navigation";
 import {
   Card,
   CardContent,
@@ -35,7 +36,7 @@ export function QuickActions() {
       title: "Manage Contacts",
       description: "View and edit students",
       icon: Users,
-      href: "/dashboard/contacts",
+      href: navigation.teacher.contacts,
       color: "bg-amber-100 text-amber-700",
     },
   ];

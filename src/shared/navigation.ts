@@ -7,6 +7,7 @@ export const navigation = {
   },
   teacher: {
     dashboard: "/teacher/dashboard",
+    contacts: "/teacher/contacts",
   },
   student: {
     dashboard: "/student/dashboard",

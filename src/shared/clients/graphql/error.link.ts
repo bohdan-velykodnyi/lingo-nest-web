@@ -54,7 +54,7 @@ const resolvePendingRequests = (accessToken: string) => {
 
 export const errorLink = onError(({ graphQLErrors, operation, forward }) => {
   if (!graphQLErrors) {
-    return forward(operation);
+    return undefined;
   }
 
   for (const err of graphQLErrors) {
@@ -81,5 +81,5 @@ export const errorLink = onError(({ graphQLErrors, operation, forward }) => {
     }
   }
 
-  return forward(operation);
+  return undefined;
 });

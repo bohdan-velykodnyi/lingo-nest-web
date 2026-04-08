@@ -7,7 +7,7 @@ import { ThemeProvider } from "./providers/theme";
 
 export const App = () => (
   <ApolloProvider client={apolloClient}>
-    <ThemeProvider defaultTheme="dark" storageKey="ui-theme">
+    <ThemeProvider defaultTheme="dark">
       <RouterProvider />
       <Toaster />
     </ThemeProvider>

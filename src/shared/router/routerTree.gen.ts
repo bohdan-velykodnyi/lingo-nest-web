@@ -27,6 +27,7 @@ import { Route as InnerAdminIndexImport } from "./../../pages/_inner/admin/index
 import { Route as AuthAuthFormRegistrationImport } from "./../../pages/auth/_auth-form/registration";
 import { Route as AuthAuthFormLoginImport } from "./../../pages/auth/_auth-form/login";
 import { Route as InnerTeacherDashboardImport } from "./../../pages/_inner/teacher/dashboard";
+import { Route as InnerTeacherContactsImport } from "./../../pages/_inner/teacher/contacts";
 import { Route as InnerStudentDashboardImport } from "./../../pages/_inner/student/dashboard";
 import { Route as InnerAdminDashboardImport } from "./../../pages/_inner/admin/dashboard";
 
@@ -123,6 +124,12 @@ const AuthAuthFormLoginRoute = AuthAuthFormLoginImport.update({
 const InnerTeacherDashboardRoute = InnerTeacherDashboardImport.update({
   id: "/dashboard",
   path: "/dashboard",
+  getParentRoute: () => InnerTeacherRouteRoute,
+} as any);
+
+const InnerTeacherContactsRoute = InnerTeacherContactsImport.update({
+  id: "/contacts",
+  path: "/contacts",
   getParentRoute: () => InnerTeacherRouteRoute,
 } as any);
 
@@ -226,6 +233,13 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof InnerStudentDashboardImport;
       parentRoute: typeof InnerStudentRouteImport;
     };
+    "/_inner/teacher/contacts": {
+      id: "/_inner/teacher/contacts";
+      path: "/contacts";
+      fullPath: "/teacher/contacts";
+      preLoaderRoute: typeof InnerTeacherContactsImport;
+      parentRoute: typeof InnerTeacherRouteImport;
+    };
     "/_inner/teacher/dashboard": {
       id: "/_inner/teacher/dashboard";
       path: "/dashboard";
@@ -301,11 +315,13 @@ const InnerStudentRouteRouteWithChildren =
   InnerStudentRouteRoute._addFileChildren(InnerStudentRouteRouteChildren);
 
 interface InnerTeacherRouteRouteChildren {
+  InnerTeacherContactsRoute: typeof InnerTeacherContactsRoute;
   InnerTeacherDashboardRoute: typeof InnerTeacherDashboardRoute;
   InnerTeacherIndexRoute: typeof InnerTeacherIndexRoute;
 }
 
 const InnerTeacherRouteRouteChildren: InnerTeacherRouteRouteChildren = {
+  InnerTeacherContactsRoute: InnerTeacherContactsRoute,
   InnerTeacherDashboardRoute: InnerTeacherDashboardRoute,
   InnerTeacherIndexRoute: InnerTeacherIndexRoute,
 };
@@ -372,6 +388,7 @@ export interface FileRoutesByFullPath {
   "/auth/": typeof AuthIndexRoute;
   "/admin/dashboard": typeof InnerAdminDashboardRoute;
   "/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/teacher/contacts": typeof InnerTeacherContactsRoute;
   "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
   "/auth/login": typeof AuthAuthFormLoginRoute;
   "/auth/registration": typeof AuthAuthFormRegistrationRoute;
@@ -388,6 +405,7 @@ export interface FileRoutesByTo {
   "/auth/reset-password": typeof AuthResetPasswordRoute;
   "/admin/dashboard": typeof InnerAdminDashboardRoute;
   "/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/teacher/contacts": typeof InnerTeacherContactsRoute;
   "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
   "/auth/login": typeof AuthAuthFormLoginRoute;
   "/auth/registration": typeof AuthAuthFormRegistrationRoute;
@@ -410,6 +428,7 @@ export interface FileRoutesById {
   "/auth/": typeof AuthIndexRoute;
   "/_inner/admin/dashboard": typeof InnerAdminDashboardRoute;
   "/_inner/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/_inner/teacher/contacts": typeof InnerTeacherContactsRoute;
   "/_inner/teacher/dashboard": typeof InnerTeacherDashboardRoute;
   "/auth/_auth-form/login": typeof AuthAuthFormLoginRoute;
   "/auth/_auth-form/registration": typeof AuthAuthFormRegistrationRoute;
@@ -432,6 +451,7 @@ export interface FileRouteTypes {
     | "/auth/"
     | "/admin/dashboard"
     | "/student/dashboard"
+    | "/teacher/contacts"
     | "/teacher/dashboard"
     | "/auth/login"
     | "/auth/registration"
@@ -447,6 +467,7 @@ export interface FileRouteTypes {
     | "/auth/reset-password"
     | "/admin/dashboard"
     | "/student/dashboard"
+    | "/teacher/contacts"
     | "/teacher/dashboard"
     | "/auth/login"
     | "/auth/registration"
@@ -467,6 +488,7 @@ export interface FileRouteTypes {
     | "/auth/"
     | "/_inner/admin/dashboard"
     | "/_inner/student/dashboard"
+    | "/_inner/teacher/contacts"
     | "/_inner/teacher/dashboard"
     | "/auth/_auth-form/login"
     | "/auth/_auth-form/registration"
@@ -543,6 +565,7 @@ export const routeTree = rootRoute
       "filePath": "_inner/teacher/route.tsx",
       "parent": "/_inner",
       "children": [
+        "/_inner/teacher/contacts",
         "/_inner/teacher/dashboard",
         "/_inner/teacher/"
       ]
@@ -574,6 +597,10 @@ export const routeTree = rootRoute
     "/_inner/student/dashboard": {
       "filePath": "_inner/student/dashboard.tsx",
       "parent": "/_inner/student"
+    },
+    "/_inner/teacher/contacts": {
+      "filePath": "_inner/teacher/contacts.tsx",
+      "parent": "/_inner/teacher"
     },
     "/_inner/teacher/dashboard": {
       "filePath": "_inner/teacher/dashboard.tsx",
