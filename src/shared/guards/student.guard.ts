@@ -10,13 +10,13 @@ export const studentGuard = async () => {
     query: GET_USER,
   });
 
-  if (data.getCurrentUser.role === UserRole.Teacher) {
+  if (data?.getCurrentUser.role === UserRole.Teacher) {
     throw redirect({
       to: navigation.teacher.dashboard,
     });
   }
 
-  if (data.getCurrentUser.role === UserRole.Admin) {
+  if (data?.getCurrentUser.role === UserRole.Admin) {
     throw redirect({
       to: navigation.admin.dashboard,
     });

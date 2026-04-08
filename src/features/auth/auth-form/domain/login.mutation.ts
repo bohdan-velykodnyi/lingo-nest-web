@@ -1,7 +1,7 @@
 import { graphql } from "@/shared/api";
 import { setTokens } from "@/shared/model/tokens";
 import { navigation } from "@/shared/navigation";
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 
@@ -31,13 +31,11 @@ export const useLoginMutation = (markFormInvalid: () => void) => {
       });
     },
     onError: (error) => {
-      error.graphQLErrors.forEach((err) => {
-        const message = err.extensions?.message as string;
+      const message = error.message;
 
-        if (message) {
-          toast.error(message);
-        }
-      });
+      if (message) {
+        toast.error(message);
+      }
 
       markFormInvalid();
     },

@@ -1,5 +1,5 @@
 import { graphql } from "@/shared/api";
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 
 export const GET_USER = graphql(/* GraphQL */ `
   query getCurrentUser {

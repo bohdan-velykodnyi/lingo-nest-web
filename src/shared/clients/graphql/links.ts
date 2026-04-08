@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { CONFIG } from "@/shared/config.ts";
 import { ApolloLink, HttpLink } from "@apollo/client";
-import { setContext } from "@apollo/client/link/context";
+import { SetContextLink } from "@apollo/client/link/context";
 import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { createClient } from "graphql-ws";
@@ -35,7 +35,7 @@ export const wsLink = new GraphQLWsLink(
   }),
 );
 
-export const authLink = setContext(async (_, { headers }) => {
+export const authLink = new SetContextLink(({ headers }) => {
   const accessToken = localStorage.getItem("accessToken");
 
   return {

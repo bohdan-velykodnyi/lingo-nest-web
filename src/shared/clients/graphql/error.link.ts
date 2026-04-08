@@ -5,15 +5,16 @@ import {
   setTokens,
 } from "@/shared/model/tokens";
 import { router } from "@/shared/router";
-import { fromPromise, type Operation } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import { type ApolloLink, CombinedGraphQLErrors } from "@apollo/client";
+import { ErrorLink } from "@apollo/client/link/error";
+import { filter, from, switchMap } from "rxjs";
 
 interface PendingRequest {
   resolve: ResolveForward;
-  operation: Operation;
+  operation: ApolloLink.Operation;
 }
 
-type ResolveForward = (value: Operation) => void;
+type ResolveForward = (value: ApolloLink.Operation) => void;
 
 const JWT_EXPIRED_ERROR = "Unauthorized";
 
@@ -52,12 +53,12 @@ const resolvePendingRequests = (accessToken: string) => {
   pendingRequests.length = 0;
 };
 
-export const errorLink = onError(({ graphQLErrors, operation, forward }) => {
-  if (!graphQLErrors) {
+export const errorLink = new ErrorLink(({ error, operation, forward }) => {
+  if (!CombinedGraphQLErrors.is(error)) {
     return undefined;
   }
 
-  for (const err of graphQLErrors) {
+  for (const err of error.errors) {
     switch (err.message) {
       case JWT_EXPIRED_ERROR:
         if (operation.operationName === "refreshTokens" || !getRefreshToken()) {
@@ -71,13 +72,16 @@ export const errorLink = onError(({ graphQLErrors, operation, forward }) => {
           getNewToken();
         }
 
-        return fromPromise(
-          new Promise((resolve: ResolveForward) =>
+        return from(
+          new Promise<ApolloLink.Operation>((resolve: ResolveForward) =>
             pendingRequests.push({ resolve, operation }),
           ),
-        )
-          .filter((value) => Boolean(value))
-          .flatMap((newOperation: Operation) => forward(newOperation));
+        ).pipe(
+          filter(Boolean),
+          switchMap((newOperation: ApolloLink.Operation) =>
+            forward(newOperation),
+          ),
+        );
     }
   }
 

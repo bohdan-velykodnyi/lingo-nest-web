@@ -1,6 +1,6 @@
 import { apolloClient } from "@/shared/clients/graphql";
 import { Toaster } from "@/shared/ui/kit/sonner";
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from "@apollo/client/react";
 
 import { RouterProvider } from "./providers/router";
 import { ThemeProvider } from "./providers/theme";

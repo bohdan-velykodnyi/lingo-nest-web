@@ -10,13 +10,13 @@ export const adminGuard = async () => {
     query: GET_USER,
   });
 
-  if (data.getCurrentUser.role === UserRole.Teacher) {
+  if (data?.getCurrentUser.role === UserRole.Teacher) {
     throw redirect({
       to: navigation.teacher.dashboard,
     });
   }
 
-  if (data.getCurrentUser.role === UserRole.Student) {
+  if (data?.getCurrentUser.role === UserRole.Student) {
     throw redirect({
       to: navigation.student.dashboard,
     });

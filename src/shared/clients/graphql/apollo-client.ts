@@ -6,7 +6,9 @@ import { authLink, fullLink } from "./links.ts";
 
 export const apolloClient = new ApolloClient({
   cache,
-  connectToDevTools: true,
+  devtools: {
+    enabled: true,
+  },
   ssrMode: false,
   defaultOptions: {
     watchQuery: { fetchPolicy: "cache-first", nextFetchPolicy: "cache-first" },

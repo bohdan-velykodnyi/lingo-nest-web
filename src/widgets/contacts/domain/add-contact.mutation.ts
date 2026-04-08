@@ -1,5 +1,7 @@
+import type { ErrorLike } from "@apollo/client";
+
 import { graphql } from "@/shared/api";
-import { type ApolloError, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { toast } from "sonner";
 
 const ADD_CONTACT = graphql(/* GraphQL */ `
@@ -32,13 +34,12 @@ const ADD_CONTACT = graphql(/* GraphQL */ `
 `);
 
 export const useAddContactMutation = () => {
-  const handleError = (error: ApolloError) => {
-    error.graphQLErrors.forEach((err) => {
-      const message = err.extensions?.message as string;
-      if (message) {
-        toast.error(message);
-      }
-    });
+  const handleError = (error: ErrorLike) => {
+    const message = error.message;
+
+    if (message) {
+      toast.error(message);
+    }
   };
 
   const mutation = useMutation(ADD_CONTACT, {

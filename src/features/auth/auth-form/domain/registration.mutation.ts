@@ -1,5 +1,5 @@
 import { graphql } from "@/shared/api";
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { toast } from "sonner";
 
 const REGISTRATION = graphql(/* GraphQL */ `
@@ -15,13 +15,11 @@ const REGISTRATION = graphql(/* GraphQL */ `
 export const useRegistrationMutation = (markFormInvalid: () => void) =>
   useMutation(REGISTRATION, {
     onError: (error) => {
-      error.graphQLErrors.forEach((err) => {
-        const message = err.extensions?.message as string;
+      const message = error.message;
 
-        if (message) {
-          toast.error(message);
-        }
-      });
+      if (message) {
+        toast.error(message);
+      }
 
       markFormInvalid();
     },

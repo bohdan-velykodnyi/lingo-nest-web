@@ -1,7 +1,7 @@
 import { graphql } from "@/shared/api";
 import { clearTokens, getRefreshToken } from "@/shared/model/tokens";
 import { navigation } from "@/shared/navigation";
-import { useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client/react";
 import { useNavigate } from "@tanstack/react-router";
 
 const LOGOUT = graphql(/* GraphQL */ `
