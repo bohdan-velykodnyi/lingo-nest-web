@@ -7,6 +7,7 @@ import { eslintBoundariesConfig } from "./eslint.boundaries.js";
 import pluginRouter from "@tanstack/eslint-plugin-router";
 import importPlugin from "eslint-plugin-import";
 import pluginReact from "eslint-plugin-react";
+import { fixupConfigRules } from '@eslint/compat'
 
 export default tseslint.config(
   { ignores: ["dist", "src/shared/ui/*"] },
@@ -15,9 +16,9 @@ export default tseslint.config(
       js.configs.recommended,
       ...tseslint.configs.recommended,
       ...tseslint.configs.recommended,
-      pluginReact.configs.flat.recommended,
+      ...fixupConfigRules(pluginReact.configs.flat.recommended),
       ...pluginRouter.configs["flat/recommended"],
-      importPlugin.flatConfigs.recommended,
+      ...fixupConfigRules(importPlugin.flatConfigs.recommended), 
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
@@ -46,6 +47,7 @@ export default tseslint.config(
       "no-unneeded-ternary": "warn",
       "no-nested-ternary": "warn",
       "no-mixed-operators": "warn",
+      'react/display-name': 'warn',
       complexity: ["off", 15],
       curly: "warn",
       "no-restricted-syntax": [

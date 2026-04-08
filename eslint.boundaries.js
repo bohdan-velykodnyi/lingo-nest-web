@@ -10,91 +10,93 @@ export const eslintBoundariesConfig = {
         alwaysTryTypes: true,
       },
     },
-
     "boundaries/elements": [
-      {
-        type: "app",
-        pattern: "./src/app",
-      },
-      {
-        type: "pages",
-        pattern: "./src/pages/*",
-      },
-      {
-        type: "widgets",
-        pattern: "./src/widgets/*",
-      },
-      {
-        type: "features",
-        pattern: "./src/features/*",
-      },
-      {
-        type: "entities",
-        pattern: "./src/entities/*",
-      },
-      {
-        type: "shared",
-        pattern: "./src/shared",
-      },
+      { type: "app",      pattern: "./src/app" },
+      { type: "pages",    pattern: "./src/pages/*" },
+      { type: "widgets",  pattern: "./src/widgets/*" },
+      { type: "features", pattern: "./src/features/*" },
+      { type: "entities", pattern: "./src/entities/*" },
+      { type: "shared",   pattern: "./src/shared" },
     ],
   },
   rules: {
-    "boundaries/element-types": [
+    "boundaries/dependencies": [
       2,
       {
         default: "allow",
         rules: [
+          // Layer isolation rules
           {
-            from: "shared",
-            disallow: ["app", "pages", "widgets", "features", "entities"],
-            message:
-              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+            from: [{ type: "shared" }],
+            disallow: [
+              { to: { type: "app" } },
+              { to: { type: "pages" } },
+              { to: { type: "widgets" } },
+              { to: { type: "features" } },
+              { to: { type: "entities" } },
+            ],
+            message: "Module lower layer ({{from.type}}) can't import module higher layer ({{to.type}})",
           },
           {
-            from: "entities",
-            disallow: ["app", "pages", "widgets", "features"],
-            message:
-              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+            from: [{ type: "entities" }],
+            disallow: [
+              { to: { type: "app" } },
+              { to: { type: "pages" } },
+              { to: { type: "widgets" } },
+              { to: { type: "features" } },
+            ],
+            message: "Module lower layer ({{from.type}}) can't import module higher layer ({{to.type}})",
           },
           {
-            from: "features",
-            disallow: ["app", "pages", "widgets"],
-            message:
-              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+            from: [{ type: "features" }],
+            disallow: [
+              { to: { type: "app" } },
+              { to: { type: "pages" } },
+              { to: { type: "widgets" } },
+            ],
+            message: "Module lower layer ({{from.type}}) can't import module higher layer ({{to.type}})",
           },
           {
-            from: "widgets",
-            disallow: ["app", "pages"],
-            message:
-              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+            from: [{ type: "widgets" }],
+            disallow: [
+              { to: { type: "app" } },
+              { to: { type: "pages" } },
+            ],
+            message: "Module lower layer ({{from.type}}) can't import module higher layer ({{to.type}})",
           },
           {
-            from: "pages",
-            disallow: ["app"],
-            message:
-              "Module lower layer (${file.type}) can't import module higher layer (${dependency.type})",
+            from: [{ type: "pages" }],
+            disallow: [
+              { to: { type: "app" } },
+            ],
+            message: "Module lower layer ({{from.type}}) can't import module higher layer ({{to.type}})",
           },
-        ],
-      },
-    ],
-    "boundaries/entry-point": [
-      2,
-      {
-        default: "disallow",
-        message: "Module (${file.type}) should be imported using public API.",
 
-        rules: [
+          // Entry-point / public API rules
+          // shared and app: allow everything (no restriction needed with default: allow)
+          // features, entities, widgets: only index.(ts|tsx) or *.page.tsx
           {
-            target: ["shared", "app"],
-            allow: "**",
+            disallow: [
+              {
+                to: {
+                  type: ["features", "entities", "widgets"],
+                  internalPath: "!{index.(ts|tsx),*.page.tsx}",
+                },
+              },
+            ],
+            message: "Module ({{to.type}}) should be imported using public API.",
           },
+          // pages: allow layout files and everything under pages
           {
-            target: ["features", "entities", "widgets"],
-            allow: ["index.(ts|tsx)", "*.page.tsx"],
-          },
-          {
-            target: ["pages"],
-            allow: ["**/layout.{ts,tsx}", "**/*.layout.{ts,tsx}", "**"],
+            disallow: [
+              {
+                to: {
+                  type: "pages",
+                  internalPath: "!{**/layout.{ts,tsx},**/*.layout.{ts,tsx},**}",
+                },
+              },
+            ],
+            message: "Module ({{to.type}}) should be imported using public API.",
           },
         ],
       },
