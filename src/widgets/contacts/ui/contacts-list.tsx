@@ -270,7 +270,7 @@ function ContactActions({ contact }: { contact: any }) {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem>
           <ChevronRight className="mr-2 h-4 w-4" />
-          View Profile
+          View Profile {contact.name}
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Calendar className="mr-2 h-4 w-4" />

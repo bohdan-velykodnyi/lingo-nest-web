@@ -8,284 +8,379 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from "./../../pages/__root";
+import { Route as AuthRouteRouteImport } from "./../../pages/auth/route";
+import { Route as InnerRouteRouteImport } from "./../../pages/_inner/route";
+import { Route as IndexRouteImport } from "./../../pages/index";
+import { Route as AuthIndexRouteImport } from "./../../pages/auth/index";
+import { Route as AuthResetPasswordRouteImport } from "./../../pages/auth/reset-password";
+import { Route as AuthForgotPasswordRouteImport } from "./../../pages/auth/forgot-password";
+import { Route as AuthAuthFormRouteRouteImport } from "./../../pages/auth/_auth-form/route";
+import { Route as InnerTeacherRouteRouteImport } from "./../../pages/_inner/teacher/route";
+import { Route as InnerStudentRouteRouteImport } from "./../../pages/_inner/student/route";
+import { Route as InnerAdminRouteRouteImport } from "./../../pages/_inner/admin/route";
+import { Route as InnerTeacherIndexRouteImport } from "./../../pages/_inner/teacher/index";
+import { Route as InnerStudentIndexRouteImport } from "./../../pages/_inner/student/index";
+import { Route as InnerAdminIndexRouteImport } from "./../../pages/_inner/admin/index";
+import { Route as AuthAuthFormRegistrationRouteImport } from "./../../pages/auth/_auth-form/registration";
+import { Route as AuthAuthFormLoginRouteImport } from "./../../pages/auth/_auth-form/login";
+import { Route as InnerTeacherDashboardRouteImport } from "./../../pages/_inner/teacher/dashboard";
+import { Route as InnerTeacherContactsRouteImport } from "./../../pages/_inner/teacher/contacts";
+import { Route as InnerStudentDashboardRouteImport } from "./../../pages/_inner/student/dashboard";
+import { Route as InnerAdminDashboardRouteImport } from "./../../pages/_inner/admin/dashboard";
 
-import { Route as rootRoute } from "./../../pages/__root";
-import { Route as AuthRouteImport } from "./../../pages/auth/route";
-import { Route as InnerRouteImport } from "./../../pages/_inner/route";
-import { Route as IndexImport } from "./../../pages/index";
-import { Route as AuthIndexImport } from "./../../pages/auth/index";
-import { Route as AuthResetPasswordImport } from "./../../pages/auth/reset-password";
-import { Route as AuthForgotPasswordImport } from "./../../pages/auth/forgot-password";
-import { Route as AuthAuthFormRouteImport } from "./../../pages/auth/_auth-form/route";
-import { Route as InnerTeacherRouteImport } from "./../../pages/_inner/teacher/route";
-import { Route as InnerStudentRouteImport } from "./../../pages/_inner/student/route";
-import { Route as InnerAdminRouteImport } from "./../../pages/_inner/admin/route";
-import { Route as InnerTeacherIndexImport } from "./../../pages/_inner/teacher/index";
-import { Route as InnerStudentIndexImport } from "./../../pages/_inner/student/index";
-import { Route as InnerAdminIndexImport } from "./../../pages/_inner/admin/index";
-import { Route as AuthAuthFormRegistrationImport } from "./../../pages/auth/_auth-form/registration";
-import { Route as AuthAuthFormLoginImport } from "./../../pages/auth/_auth-form/login";
-import { Route as InnerTeacherDashboardImport } from "./../../pages/_inner/teacher/dashboard";
-import { Route as InnerTeacherContactsImport } from "./../../pages/_inner/teacher/contacts";
-import { Route as InnerStudentDashboardImport } from "./../../pages/_inner/student/dashboard";
-import { Route as InnerAdminDashboardImport } from "./../../pages/_inner/admin/dashboard";
-
-// Create/Update Routes
-
-const AuthRouteRoute = AuthRouteImport.update({
+const AuthRouteRoute = AuthRouteRouteImport.update({
   id: "/auth",
   path: "/auth",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any);
-
-const InnerRouteRoute = InnerRouteImport.update({
+const InnerRouteRoute = InnerRouteRouteImport.update({
   id: "/_inner",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any);
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: "/",
   path: "/",
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any);
-
-const AuthIndexRoute = AuthIndexImport.update({
+const AuthIndexRoute = AuthIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => AuthRouteRoute,
 } as any);
-
-const AuthResetPasswordRoute = AuthResetPasswordImport.update({
+const AuthResetPasswordRoute = AuthResetPasswordRouteImport.update({
   id: "/reset-password",
   path: "/reset-password",
   getParentRoute: () => AuthRouteRoute,
 } as any);
-
-const AuthForgotPasswordRoute = AuthForgotPasswordImport.update({
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   id: "/forgot-password",
   path: "/forgot-password",
   getParentRoute: () => AuthRouteRoute,
 } as any);
-
-const AuthAuthFormRouteRoute = AuthAuthFormRouteImport.update({
+const AuthAuthFormRouteRoute = AuthAuthFormRouteRouteImport.update({
   id: "/_auth-form",
   getParentRoute: () => AuthRouteRoute,
 } as any);
-
-const InnerTeacherRouteRoute = InnerTeacherRouteImport.update({
+const InnerTeacherRouteRoute = InnerTeacherRouteRouteImport.update({
   id: "/teacher",
   path: "/teacher",
   getParentRoute: () => InnerRouteRoute,
 } as any);
-
-const InnerStudentRouteRoute = InnerStudentRouteImport.update({
+const InnerStudentRouteRoute = InnerStudentRouteRouteImport.update({
   id: "/student",
   path: "/student",
   getParentRoute: () => InnerRouteRoute,
 } as any);
-
-const InnerAdminRouteRoute = InnerAdminRouteImport.update({
+const InnerAdminRouteRoute = InnerAdminRouteRouteImport.update({
   id: "/admin",
   path: "/admin",
   getParentRoute: () => InnerRouteRoute,
 } as any);
-
-const InnerTeacherIndexRoute = InnerTeacherIndexImport.update({
+const InnerTeacherIndexRoute = InnerTeacherIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => InnerTeacherRouteRoute,
 } as any);
-
-const InnerStudentIndexRoute = InnerStudentIndexImport.update({
+const InnerStudentIndexRoute = InnerStudentIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => InnerStudentRouteRoute,
 } as any);
-
-const InnerAdminIndexRoute = InnerAdminIndexImport.update({
+const InnerAdminIndexRoute = InnerAdminIndexRouteImport.update({
   id: "/",
   path: "/",
   getParentRoute: () => InnerAdminRouteRoute,
 } as any);
-
-const AuthAuthFormRegistrationRoute = AuthAuthFormRegistrationImport.update({
-  id: "/registration",
-  path: "/registration",
-  getParentRoute: () => AuthAuthFormRouteRoute,
-} as any);
-
-const AuthAuthFormLoginRoute = AuthAuthFormLoginImport.update({
+const AuthAuthFormRegistrationRoute =
+  AuthAuthFormRegistrationRouteImport.update({
+    id: "/registration",
+    path: "/registration",
+    getParentRoute: () => AuthAuthFormRouteRoute,
+  } as any);
+const AuthAuthFormLoginRoute = AuthAuthFormLoginRouteImport.update({
   id: "/login",
   path: "/login",
   getParentRoute: () => AuthAuthFormRouteRoute,
 } as any);
-
-const InnerTeacherDashboardRoute = InnerTeacherDashboardImport.update({
+const InnerTeacherDashboardRoute = InnerTeacherDashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
   getParentRoute: () => InnerTeacherRouteRoute,
 } as any);
-
-const InnerTeacherContactsRoute = InnerTeacherContactsImport.update({
+const InnerTeacherContactsRoute = InnerTeacherContactsRouteImport.update({
   id: "/contacts",
   path: "/contacts",
   getParentRoute: () => InnerTeacherRouteRoute,
 } as any);
-
-const InnerStudentDashboardRoute = InnerStudentDashboardImport.update({
+const InnerStudentDashboardRoute = InnerStudentDashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
   getParentRoute: () => InnerStudentRouteRoute,
 } as any);
-
-const InnerAdminDashboardRoute = InnerAdminDashboardImport.update({
+const InnerAdminDashboardRoute = InnerAdminDashboardRouteImport.update({
   id: "/dashboard",
   path: "/dashboard",
   getParentRoute: () => InnerAdminRouteRoute,
 } as any);
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  "/": typeof IndexRoute;
+  "/auth": typeof AuthAuthFormRouteRouteWithChildren;
+  "/admin": typeof InnerAdminRouteRouteWithChildren;
+  "/student": typeof InnerStudentRouteRouteWithChildren;
+  "/teacher": typeof InnerTeacherRouteRouteWithChildren;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
+  "/auth/": typeof AuthIndexRoute;
+  "/admin/dashboard": typeof InnerAdminDashboardRoute;
+  "/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/teacher/contacts": typeof InnerTeacherContactsRoute;
+  "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
+  "/auth/login": typeof AuthAuthFormLoginRoute;
+  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
+  "/admin/": typeof InnerAdminIndexRoute;
+  "/student/": typeof InnerStudentIndexRoute;
+  "/teacher/": typeof InnerTeacherIndexRoute;
+}
+export interface FileRoutesByTo {
+  "/": typeof IndexRoute;
+  "/auth": typeof AuthIndexRoute;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
+  "/admin/dashboard": typeof InnerAdminDashboardRoute;
+  "/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/teacher/contacts": typeof InnerTeacherContactsRoute;
+  "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
+  "/auth/login": typeof AuthAuthFormLoginRoute;
+  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
+  "/admin": typeof InnerAdminIndexRoute;
+  "/student": typeof InnerStudentIndexRoute;
+  "/teacher": typeof InnerTeacherIndexRoute;
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/_inner": typeof InnerRouteRouteWithChildren;
+  "/auth": typeof AuthRouteRouteWithChildren;
+  "/_inner/admin": typeof InnerAdminRouteRouteWithChildren;
+  "/_inner/student": typeof InnerStudentRouteRouteWithChildren;
+  "/_inner/teacher": typeof InnerTeacherRouteRouteWithChildren;
+  "/auth/_auth-form": typeof AuthAuthFormRouteRouteWithChildren;
+  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
+  "/auth/reset-password": typeof AuthResetPasswordRoute;
+  "/auth/": typeof AuthIndexRoute;
+  "/_inner/admin/dashboard": typeof InnerAdminDashboardRoute;
+  "/_inner/student/dashboard": typeof InnerStudentDashboardRoute;
+  "/_inner/teacher/contacts": typeof InnerTeacherContactsRoute;
+  "/_inner/teacher/dashboard": typeof InnerTeacherDashboardRoute;
+  "/auth/_auth-form/login": typeof AuthAuthFormLoginRoute;
+  "/auth/_auth-form/registration": typeof AuthAuthFormRegistrationRoute;
+  "/_inner/admin/": typeof InnerAdminIndexRoute;
+  "/_inner/student/": typeof InnerStudentIndexRoute;
+  "/_inner/teacher/": typeof InnerTeacherIndexRoute;
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath;
+  fullPaths:
+    | "/"
+    | "/auth"
+    | "/admin"
+    | "/student"
+    | "/teacher"
+    | "/auth/forgot-password"
+    | "/auth/reset-password"
+    | "/auth/"
+    | "/admin/dashboard"
+    | "/student/dashboard"
+    | "/teacher/contacts"
+    | "/teacher/dashboard"
+    | "/auth/login"
+    | "/auth/registration"
+    | "/admin/"
+    | "/student/"
+    | "/teacher/";
+  fileRoutesByTo: FileRoutesByTo;
+  to:
+    | "/"
+    | "/auth"
+    | "/auth/forgot-password"
+    | "/auth/reset-password"
+    | "/admin/dashboard"
+    | "/student/dashboard"
+    | "/teacher/contacts"
+    | "/teacher/dashboard"
+    | "/auth/login"
+    | "/auth/registration"
+    | "/admin"
+    | "/student"
+    | "/teacher";
+  id:
+    | "__root__"
+    | "/"
+    | "/_inner"
+    | "/auth"
+    | "/_inner/admin"
+    | "/_inner/student"
+    | "/_inner/teacher"
+    | "/auth/_auth-form"
+    | "/auth/forgot-password"
+    | "/auth/reset-password"
+    | "/auth/"
+    | "/_inner/admin/dashboard"
+    | "/_inner/student/dashboard"
+    | "/_inner/teacher/contacts"
+    | "/_inner/teacher/dashboard"
+    | "/auth/_auth-form/login"
+    | "/auth/_auth-form/registration"
+    | "/_inner/admin/"
+    | "/_inner/student/"
+    | "/_inner/teacher/";
+  fileRoutesById: FileRoutesById;
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute;
+  InnerRouteRoute: typeof InnerRouteRouteWithChildren;
+  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
+}
 
 declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexImport;
-      parentRoute: typeof rootRoute;
-    };
-    "/_inner": {
-      id: "/_inner";
-      path: "";
-      fullPath: "";
-      preLoaderRoute: typeof InnerRouteImport;
-      parentRoute: typeof rootRoute;
-    };
     "/auth": {
       id: "/auth";
       path: "/auth";
       fullPath: "/auth";
-      preLoaderRoute: typeof AuthRouteImport;
-      parentRoute: typeof rootRoute;
+      preLoaderRoute: typeof AuthRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
-    "/_inner/admin": {
-      id: "/_inner/admin";
-      path: "/admin";
-      fullPath: "/admin";
-      preLoaderRoute: typeof InnerAdminRouteImport;
-      parentRoute: typeof InnerRouteImport;
-    };
-    "/_inner/student": {
-      id: "/_inner/student";
-      path: "/student";
-      fullPath: "/student";
-      preLoaderRoute: typeof InnerStudentRouteImport;
-      parentRoute: typeof InnerRouteImport;
-    };
-    "/_inner/teacher": {
-      id: "/_inner/teacher";
-      path: "/teacher";
-      fullPath: "/teacher";
-      preLoaderRoute: typeof InnerTeacherRouteImport;
-      parentRoute: typeof InnerRouteImport;
-    };
-    "/auth/_auth-form": {
-      id: "/auth/_auth-form";
+    "/_inner": {
+      id: "/_inner";
       path: "";
-      fullPath: "/auth";
-      preLoaderRoute: typeof AuthAuthFormRouteImport;
-      parentRoute: typeof AuthRouteImport;
+      fullPath: "/";
+      preLoaderRoute: typeof InnerRouteRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
-    "/auth/forgot-password": {
-      id: "/auth/forgot-password";
-      path: "/forgot-password";
-      fullPath: "/auth/forgot-password";
-      preLoaderRoute: typeof AuthForgotPasswordImport;
-      parentRoute: typeof AuthRouteImport;
-    };
-    "/auth/reset-password": {
-      id: "/auth/reset-password";
-      path: "/reset-password";
-      fullPath: "/auth/reset-password";
-      preLoaderRoute: typeof AuthResetPasswordImport;
-      parentRoute: typeof AuthRouteImport;
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
     };
     "/auth/": {
       id: "/auth/";
       path: "/";
       fullPath: "/auth/";
-      preLoaderRoute: typeof AuthIndexImport;
-      parentRoute: typeof AuthRouteImport;
+      preLoaderRoute: typeof AuthIndexRouteImport;
+      parentRoute: typeof AuthRouteRoute;
     };
-    "/_inner/admin/dashboard": {
-      id: "/_inner/admin/dashboard";
-      path: "/dashboard";
-      fullPath: "/admin/dashboard";
-      preLoaderRoute: typeof InnerAdminDashboardImport;
-      parentRoute: typeof InnerAdminRouteImport;
+    "/auth/reset-password": {
+      id: "/auth/reset-password";
+      path: "/reset-password";
+      fullPath: "/auth/reset-password";
+      preLoaderRoute: typeof AuthResetPasswordRouteImport;
+      parentRoute: typeof AuthRouteRoute;
     };
-    "/_inner/student/dashboard": {
-      id: "/_inner/student/dashboard";
-      path: "/dashboard";
-      fullPath: "/student/dashboard";
-      preLoaderRoute: typeof InnerStudentDashboardImport;
-      parentRoute: typeof InnerStudentRouteImport;
+    "/auth/forgot-password": {
+      id: "/auth/forgot-password";
+      path: "/forgot-password";
+      fullPath: "/auth/forgot-password";
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport;
+      parentRoute: typeof AuthRouteRoute;
     };
-    "/_inner/teacher/contacts": {
-      id: "/_inner/teacher/contacts";
-      path: "/contacts";
-      fullPath: "/teacher/contacts";
-      preLoaderRoute: typeof InnerTeacherContactsImport;
-      parentRoute: typeof InnerTeacherRouteImport;
+    "/auth/_auth-form": {
+      id: "/auth/_auth-form";
+      path: "";
+      fullPath: "/auth";
+      preLoaderRoute: typeof AuthAuthFormRouteRouteImport;
+      parentRoute: typeof AuthRouteRoute;
     };
-    "/_inner/teacher/dashboard": {
-      id: "/_inner/teacher/dashboard";
-      path: "/dashboard";
-      fullPath: "/teacher/dashboard";
-      preLoaderRoute: typeof InnerTeacherDashboardImport;
-      parentRoute: typeof InnerTeacherRouteImport;
+    "/_inner/teacher": {
+      id: "/_inner/teacher";
+      path: "/teacher";
+      fullPath: "/teacher";
+      preLoaderRoute: typeof InnerTeacherRouteRouteImport;
+      parentRoute: typeof InnerRouteRoute;
     };
-    "/auth/_auth-form/login": {
-      id: "/auth/_auth-form/login";
-      path: "/login";
-      fullPath: "/auth/login";
-      preLoaderRoute: typeof AuthAuthFormLoginImport;
-      parentRoute: typeof AuthAuthFormRouteImport;
+    "/_inner/student": {
+      id: "/_inner/student";
+      path: "/student";
+      fullPath: "/student";
+      preLoaderRoute: typeof InnerStudentRouteRouteImport;
+      parentRoute: typeof InnerRouteRoute;
     };
-    "/auth/_auth-form/registration": {
-      id: "/auth/_auth-form/registration";
-      path: "/registration";
-      fullPath: "/auth/registration";
-      preLoaderRoute: typeof AuthAuthFormRegistrationImport;
-      parentRoute: typeof AuthAuthFormRouteImport;
-    };
-    "/_inner/admin/": {
-      id: "/_inner/admin/";
-      path: "/";
-      fullPath: "/admin/";
-      preLoaderRoute: typeof InnerAdminIndexImport;
-      parentRoute: typeof InnerAdminRouteImport;
-    };
-    "/_inner/student/": {
-      id: "/_inner/student/";
-      path: "/";
-      fullPath: "/student/";
-      preLoaderRoute: typeof InnerStudentIndexImport;
-      parentRoute: typeof InnerStudentRouteImport;
+    "/_inner/admin": {
+      id: "/_inner/admin";
+      path: "/admin";
+      fullPath: "/admin";
+      preLoaderRoute: typeof InnerAdminRouteRouteImport;
+      parentRoute: typeof InnerRouteRoute;
     };
     "/_inner/teacher/": {
       id: "/_inner/teacher/";
       path: "/";
       fullPath: "/teacher/";
-      preLoaderRoute: typeof InnerTeacherIndexImport;
-      parentRoute: typeof InnerTeacherRouteImport;
+      preLoaderRoute: typeof InnerTeacherIndexRouteImport;
+      parentRoute: typeof InnerTeacherRouteRoute;
+    };
+    "/_inner/student/": {
+      id: "/_inner/student/";
+      path: "/";
+      fullPath: "/student/";
+      preLoaderRoute: typeof InnerStudentIndexRouteImport;
+      parentRoute: typeof InnerStudentRouteRoute;
+    };
+    "/_inner/admin/": {
+      id: "/_inner/admin/";
+      path: "/";
+      fullPath: "/admin/";
+      preLoaderRoute: typeof InnerAdminIndexRouteImport;
+      parentRoute: typeof InnerAdminRouteRoute;
+    };
+    "/auth/_auth-form/registration": {
+      id: "/auth/_auth-form/registration";
+      path: "/registration";
+      fullPath: "/auth/registration";
+      preLoaderRoute: typeof AuthAuthFormRegistrationRouteImport;
+      parentRoute: typeof AuthAuthFormRouteRoute;
+    };
+    "/auth/_auth-form/login": {
+      id: "/auth/_auth-form/login";
+      path: "/login";
+      fullPath: "/auth/login";
+      preLoaderRoute: typeof AuthAuthFormLoginRouteImport;
+      parentRoute: typeof AuthAuthFormRouteRoute;
+    };
+    "/_inner/teacher/dashboard": {
+      id: "/_inner/teacher/dashboard";
+      path: "/dashboard";
+      fullPath: "/teacher/dashboard";
+      preLoaderRoute: typeof InnerTeacherDashboardRouteImport;
+      parentRoute: typeof InnerTeacherRouteRoute;
+    };
+    "/_inner/teacher/contacts": {
+      id: "/_inner/teacher/contacts";
+      path: "/contacts";
+      fullPath: "/teacher/contacts";
+      preLoaderRoute: typeof InnerTeacherContactsRouteImport;
+      parentRoute: typeof InnerTeacherRouteRoute;
+    };
+    "/_inner/student/dashboard": {
+      id: "/_inner/student/dashboard";
+      path: "/dashboard";
+      fullPath: "/student/dashboard";
+      preLoaderRoute: typeof InnerStudentDashboardRouteImport;
+      parentRoute: typeof InnerStudentRouteRoute;
+    };
+    "/_inner/admin/dashboard": {
+      id: "/_inner/admin/dashboard";
+      path: "/dashboard";
+      fullPath: "/admin/dashboard";
+      preLoaderRoute: typeof InnerAdminDashboardRouteImport;
+      parentRoute: typeof InnerAdminRouteRoute;
     };
   }
 }
-
-// Create and export the route tree
 
 interface InnerAdminRouteRouteChildren {
   InnerAdminDashboardRoute: typeof InnerAdminDashboardRoute;
@@ -376,256 +471,11 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
   AuthRouteRouteChildren,
 );
 
-export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "": typeof InnerRouteRouteWithChildren;
-  "/auth": typeof AuthAuthFormRouteRouteWithChildren;
-  "/admin": typeof InnerAdminRouteRouteWithChildren;
-  "/student": typeof InnerStudentRouteRouteWithChildren;
-  "/teacher": typeof InnerTeacherRouteRouteWithChildren;
-  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
-  "/auth/reset-password": typeof AuthResetPasswordRoute;
-  "/auth/": typeof AuthIndexRoute;
-  "/admin/dashboard": typeof InnerAdminDashboardRoute;
-  "/student/dashboard": typeof InnerStudentDashboardRoute;
-  "/teacher/contacts": typeof InnerTeacherContactsRoute;
-  "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
-  "/auth/login": typeof AuthAuthFormLoginRoute;
-  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
-  "/admin/": typeof InnerAdminIndexRoute;
-  "/student/": typeof InnerStudentIndexRoute;
-  "/teacher/": typeof InnerTeacherIndexRoute;
-}
-
-export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "": typeof InnerRouteRouteWithChildren;
-  "/auth": typeof AuthIndexRoute;
-  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
-  "/auth/reset-password": typeof AuthResetPasswordRoute;
-  "/admin/dashboard": typeof InnerAdminDashboardRoute;
-  "/student/dashboard": typeof InnerStudentDashboardRoute;
-  "/teacher/contacts": typeof InnerTeacherContactsRoute;
-  "/teacher/dashboard": typeof InnerTeacherDashboardRoute;
-  "/auth/login": typeof AuthAuthFormLoginRoute;
-  "/auth/registration": typeof AuthAuthFormRegistrationRoute;
-  "/admin": typeof InnerAdminIndexRoute;
-  "/student": typeof InnerStudentIndexRoute;
-  "/teacher": typeof InnerTeacherIndexRoute;
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute;
-  "/": typeof IndexRoute;
-  "/_inner": typeof InnerRouteRouteWithChildren;
-  "/auth": typeof AuthRouteRouteWithChildren;
-  "/_inner/admin": typeof InnerAdminRouteRouteWithChildren;
-  "/_inner/student": typeof InnerStudentRouteRouteWithChildren;
-  "/_inner/teacher": typeof InnerTeacherRouteRouteWithChildren;
-  "/auth/_auth-form": typeof AuthAuthFormRouteRouteWithChildren;
-  "/auth/forgot-password": typeof AuthForgotPasswordRoute;
-  "/auth/reset-password": typeof AuthResetPasswordRoute;
-  "/auth/": typeof AuthIndexRoute;
-  "/_inner/admin/dashboard": typeof InnerAdminDashboardRoute;
-  "/_inner/student/dashboard": typeof InnerStudentDashboardRoute;
-  "/_inner/teacher/contacts": typeof InnerTeacherContactsRoute;
-  "/_inner/teacher/dashboard": typeof InnerTeacherDashboardRoute;
-  "/auth/_auth-form/login": typeof AuthAuthFormLoginRoute;
-  "/auth/_auth-form/registration": typeof AuthAuthFormRegistrationRoute;
-  "/_inner/admin/": typeof InnerAdminIndexRoute;
-  "/_inner/student/": typeof InnerStudentIndexRoute;
-  "/_inner/teacher/": typeof InnerTeacherIndexRoute;
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths:
-    | "/"
-    | ""
-    | "/auth"
-    | "/admin"
-    | "/student"
-    | "/teacher"
-    | "/auth/forgot-password"
-    | "/auth/reset-password"
-    | "/auth/"
-    | "/admin/dashboard"
-    | "/student/dashboard"
-    | "/teacher/contacts"
-    | "/teacher/dashboard"
-    | "/auth/login"
-    | "/auth/registration"
-    | "/admin/"
-    | "/student/"
-    | "/teacher/";
-  fileRoutesByTo: FileRoutesByTo;
-  to:
-    | "/"
-    | ""
-    | "/auth"
-    | "/auth/forgot-password"
-    | "/auth/reset-password"
-    | "/admin/dashboard"
-    | "/student/dashboard"
-    | "/teacher/contacts"
-    | "/teacher/dashboard"
-    | "/auth/login"
-    | "/auth/registration"
-    | "/admin"
-    | "/student"
-    | "/teacher";
-  id:
-    | "__root__"
-    | "/"
-    | "/_inner"
-    | "/auth"
-    | "/_inner/admin"
-    | "/_inner/student"
-    | "/_inner/teacher"
-    | "/auth/_auth-form"
-    | "/auth/forgot-password"
-    | "/auth/reset-password"
-    | "/auth/"
-    | "/_inner/admin/dashboard"
-    | "/_inner/student/dashboard"
-    | "/_inner/teacher/contacts"
-    | "/_inner/teacher/dashboard"
-    | "/auth/_auth-form/login"
-    | "/auth/_auth-form/registration"
-    | "/_inner/admin/"
-    | "/_inner/student/"
-    | "/_inner/teacher/";
-  fileRoutesById: FileRoutesById;
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  InnerRouteRoute: typeof InnerRouteRouteWithChildren;
-  AuthRouteRoute: typeof AuthRouteRouteWithChildren;
-}
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InnerRouteRoute: InnerRouteRouteWithChildren,
   AuthRouteRoute: AuthRouteRouteWithChildren,
 };
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>();
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/_inner",
-        "/auth"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/_inner": {
-      "filePath": "_inner/route.tsx",
-      "children": [
-        "/_inner/admin",
-        "/_inner/student",
-        "/_inner/teacher"
-      ]
-    },
-    "/auth": {
-      "filePath": "auth/route.tsx",
-      "children": [
-        "/auth/_auth-form",
-        "/auth/forgot-password",
-        "/auth/reset-password",
-        "/auth/"
-      ]
-    },
-    "/_inner/admin": {
-      "filePath": "_inner/admin/route.tsx",
-      "parent": "/_inner",
-      "children": [
-        "/_inner/admin/dashboard",
-        "/_inner/admin/"
-      ]
-    },
-    "/_inner/student": {
-      "filePath": "_inner/student/route.tsx",
-      "parent": "/_inner",
-      "children": [
-        "/_inner/student/dashboard",
-        "/_inner/student/"
-      ]
-    },
-    "/_inner/teacher": {
-      "filePath": "_inner/teacher/route.tsx",
-      "parent": "/_inner",
-      "children": [
-        "/_inner/teacher/contacts",
-        "/_inner/teacher/dashboard",
-        "/_inner/teacher/"
-      ]
-    },
-    "/auth/_auth-form": {
-      "filePath": "auth/_auth-form/route.tsx",
-      "parent": "/auth",
-      "children": [
-        "/auth/_auth-form/login",
-        "/auth/_auth-form/registration"
-      ]
-    },
-    "/auth/forgot-password": {
-      "filePath": "auth/forgot-password.tsx",
-      "parent": "/auth"
-    },
-    "/auth/reset-password": {
-      "filePath": "auth/reset-password.tsx",
-      "parent": "/auth"
-    },
-    "/auth/": {
-      "filePath": "auth/index.tsx",
-      "parent": "/auth"
-    },
-    "/_inner/admin/dashboard": {
-      "filePath": "_inner/admin/dashboard.tsx",
-      "parent": "/_inner/admin"
-    },
-    "/_inner/student/dashboard": {
-      "filePath": "_inner/student/dashboard.tsx",
-      "parent": "/_inner/student"
-    },
-    "/_inner/teacher/contacts": {
-      "filePath": "_inner/teacher/contacts.tsx",
-      "parent": "/_inner/teacher"
-    },
-    "/_inner/teacher/dashboard": {
-      "filePath": "_inner/teacher/dashboard.tsx",
-      "parent": "/_inner/teacher"
-    },
-    "/auth/_auth-form/login": {
-      "filePath": "auth/_auth-form/login.tsx",
-      "parent": "/auth/_auth-form"
-    },
-    "/auth/_auth-form/registration": {
-      "filePath": "auth/_auth-form/registration.tsx",
-      "parent": "/auth/_auth-form"
-    },
-    "/_inner/admin/": {
-      "filePath": "_inner/admin/index.tsx",
-      "parent": "/_inner/admin"
-    },
-    "/_inner/student/": {
-      "filePath": "_inner/student/index.tsx",
-      "parent": "/_inner/student"
-    },
-    "/_inner/teacher/": {
-      "filePath": "_inner/teacher/index.tsx",
-      "parent": "/_inner/teacher"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

@@ -87,7 +87,7 @@ export const ForgotPassword = () => {
             </CardDescription>
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600"
+              className="w-full bg-linear-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600"
               disabled={loading}
             >
               {loading ? "Sending..." : "Send reset link"}

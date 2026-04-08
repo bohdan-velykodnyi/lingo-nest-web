@@ -105,7 +105,7 @@ export const RegistrationForm = () => {
 
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white self-end"
+          className="w-full bg-linear-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white self-end"
           disabled={loading}
         >
           {loading ? "Signing up..." : "Sign up"}

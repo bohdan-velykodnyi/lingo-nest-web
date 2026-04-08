@@ -96,7 +96,7 @@ export const LoginForm = () => {
 
         <Button
           type="submit"
-          className="w-full bg-gradient-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white"
+          className="w-full bg-linear-to-r from-violet-500 to-indigo-500 hover:from-violet-600 hover:to-indigo-600 text-white"
           disabled={loading}
         >
           {loading ? "Signing in..." : "Sign in"}
