@@ -15,7 +15,6 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      ...tseslint.configs.recommended,
       ...fixupConfigRules(pluginReact.configs.flat.recommended),
       ...pluginRouter.configs["flat/recommended"],
       ...fixupConfigRules(importPlugin.flatConfigs.recommended), 

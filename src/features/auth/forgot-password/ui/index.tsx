@@ -41,7 +41,9 @@ export const ForgotPassword = () => {
 
   const onInvalid = () => {
     const error = form.getFieldState("email").error?.message;
-    toast.error(error);
+    if (error) {
+      toast.error(error);
+    }
   };
 
   return (

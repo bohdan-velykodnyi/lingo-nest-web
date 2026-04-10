@@ -7,6 +7,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/shared/ui/kit/form";
 import { Input } from "@/shared/ui/kit/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,15 +39,7 @@ export const ResetPassword = () => {
     form.setError("confirmPassword", {});
   });
 
-  const onSubmit: SubmitHandler<ResetPasswordValues> = ({
-    password,
-    confirmPassword,
-  }) => {
-    if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-
+  const onSubmit: SubmitHandler<ResetPasswordValues> = ({ password }) => {
     forgotPassword({
       variables: {
         resetPasswordDto: {
@@ -108,7 +101,7 @@ export const ResetPassword = () => {
                   <FormControl>
                     <Input
                       type={showPassword ? "text" : "password"}
-                      className="px-10 "
+                      className="px-10"
                       disabled={loading}
                       placeholder="••••••••"
                       {...field}
@@ -141,12 +134,13 @@ export const ResetPassword = () => {
                   <FormControl>
                     <Input
                       type={showPassword ? "text" : "password"}
-                      className="px-10 "
+                      className="px-10"
                       disabled={loading}
                       placeholder="••••••••"
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
