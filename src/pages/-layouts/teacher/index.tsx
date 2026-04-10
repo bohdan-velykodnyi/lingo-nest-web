@@ -1,5 +1,6 @@
 import { SidebarInset, SidebarProvider } from "@/shared/ui/kit/sidebar";
-import { AppSidebar, Header } from "@/widgets";
+import { AppSidebar } from "@/widgets/sidebar";
+import { Header } from "@/widgets/header";
 import { Outlet } from "@tanstack/react-router";
 
 export const TeacherLayout = () => (

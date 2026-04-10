@@ -25,6 +25,9 @@ export default defineConfig({
       exclude: "**/*.svg?default",
     }),
   ],
+  optimizeDeps: {
+    include: ["lucide-react"],
+  },
   resolve: {
     tsconfigPaths: true,
   },

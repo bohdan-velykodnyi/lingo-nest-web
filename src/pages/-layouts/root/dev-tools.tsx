@@ -1,5 +1,16 @@
 import { CONFIG } from "@/shared/config";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { lazy, Suspense } from "react";
 
-export const DevTools = () =>
-  CONFIG.DEV_TOOLS_ENABLED && <TanStackRouterDevtools />;
+const TanStackRouterDevtools = CONFIG.DEV_TOOLS_ENABLED
+  ? lazy(() =>
+      import("@tanstack/react-router-devtools").then((m) => ({
+        default: m.TanStackRouterDevtools,
+      })),
+    )
+  : () => null;
+
+export const DevTools = () => (
+  <Suspense fallback={null}>
+    <TanStackRouterDevtools />
+  </Suspense>
+);
